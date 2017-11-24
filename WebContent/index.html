@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Trabalho de banco de dados</title>
+		<meta name="description" content="" />
+		<meta name="robots" content="index, follow" />
+		<script rel="text/script" src="js/jquery-3.2.1.js" charset="UTF-8"></script>
+		<!--<script src="js/perfect-scrollbar.min.js"></script>-->
+		<!--<link rel="stylesheet" href="css/perfect-scrollbar.min.css">-->
+		<link rel="stylesheet" type="text/css" href="css/estilo.css" />
+		<script rel="text/script" src="js/menuScript.js" charset="UTF-8"></script>
+		<script rel="text/script" src="js/jquery-form.js" charset="UTF-8"></script>
+		<script rel="text/script" src="js/scriptForm.js" charset="UTF-8"></script>
+		<script rel="text/script" src="js/enviarForm.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div id="window" class="window">
+			<h3>Você desejada limpar o formulário?</h3>
+			<p>Caso Sim, os dados preeenchidos serão apagados permanentemente!</p>
+			<button id="exit" class="botoes" onclick="exit('#window')">Não</button>
+		 	<button type="reset" id="reset" form="cadastrar" class="botoes">Sim</button>
+		</div>
+		<div id="sair" class="sair">
+			<h3>Você desejada sair do sistema?</h3>
+			<p>Caso Sim, você será redirecionado à tela de login!</p>
+			<button id="exit" class="botoes" onclick="exit('#sair')">Não</button>
+		 	<a href="login.jsp"><button  id="sair" class="botoes">Sim</button></a>
+		</div>
+		<header class="header">
+			<figure class="logo">
+				<img src="imagens/logo.png">
+			</figure>
+			<nav class="menu">
+				<div class="menu1"><div class="menuHover" id="menu1" onclick="menu('#subMenu1','#subMenu2','#subMenu3','#subMenu4','#subMenu5')">Fornecedor</div></div>
+				<div class="menu2"><div class="menuHover" id="menu2" onclick="menu('#subMenu2','#subMenu1','#subMenu3','#subMenu4','#subMenu5')">Cliente</div></div>
+				<div class="menu3"><div class="menuHover" id="menu3" onclick="menu('#subMenu3','#subMenu1','#subMenu2','#subMenu4','#subMenu5')">Lances</div></div>
+				<div class="menu4"><div class="menuHover" id="menu4" onclick="menu('#subMenu4','#subMenu1','#subMenu2','#subMenu3','#subMenu5')">Pedido de Compras</div></div>
+				<div class="menu5"><div class="menuHover" id="menu5" onclick="sair()">Sair</div></div>
+			</nav>
+			<nav class="subMenu" id="subMenu1">
+				<div class="botao" id="SM1botao1"><p><a href="#">Visualizar fornecedores</a></p></div>
+				<div class="botao" id="SM1botao2"><p><a href="jsp/Fornecedor.jsp">Cadastrar fornecedor</a></p></div>
+			</nav>
+			<nav class="subMenu" id="subMenu2">
+				<div class="botao" id="SM2botao1"><p>Listar categorias</p></div>
+				<div class="botao" id="SM2botao2"><p>Suas categorias</p></div>
+				<div class="botao" id="SM2botao3"><p><a href="jsp/Cliente.jsp">Cadastrar usuário</a></p></div>
+			</nav>
+			<nav class="subMenu" id="subMenu3">
+				<div class="botao" id="SM3botao1"><p>Seus lances</p></div>
+				<div class="botao" id="SM3botao2"><p>Lance de um item</p></div>
+				<div class="botao" id="SM3botao3"><p>Possiveis clientes</p></div>
+			</nav>
+			<nav class="subMenu" id="subMenu4">
+				<div class="botao" id="SM4botao1"><p>Adicionar pedido</p></div>
+				<div class="botao" id="SM4botao2"><p>Itens de um pedido</p></div>
+				<div class="botao" id="SM4botao3"><p>Remover Lance</p></div>
+			</nav>
+		</header>
+		<section class="section">
+			<article id="Formulario">
+			</article>
+			<button class="button" id="CF1">
+				Cancelar
+			</button>
+			<button type="submit" class="button" id="CF2" form="cadastrar">
+				Cadastrar
+			</button>
+			<button class="button" id="CF3">
+				<a href="#">Visualizar&nbsp;fornecedores</a>
+			</button>
+		</section>
+		<footer class="footer">
+			&copy; Trabalho de Desenvolvimento de software para web
+		</footer>
+	</body>
+</html>

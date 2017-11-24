@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.Formulario{
+	position: relative;
+	margin: 10% 0 0 10%;
+}
+
+#Formulario{
+	display: none;
+}
+
+.comboBox{
+	position: relative;
+	padding: 0.5%;
+	margin-bottom: 1%;
+	overflow-y: auto;
+}
+
+.inputCCliente{
+	position: relative;
+	padding: 0.5%;
+	margin-bottom: 1%;
+}
+
+.labelCCliente{
+	position: relative;
+	font-size: 1.2em;
+}
+
+.inputCCliente1{
+	position: relative;
+	padding: 0.5%;
+	margin-right: 5%;
+}
+
+.labelCCliente1{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 36%;
+}
+
+.inputCClienteT{
+	position: relative;
+	padding: 0.5%;
+	margin-right: 20%;
+}
+
+.labelCClienteT{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 22.6%;
+}
+
+.pessoaFisica{
+	display: block;
+}
+
+.pessoaJuridica{
+	display: none;
+}
+
+.radio1{
+	margin: 0 15% 1% 0;
+}
+
+.radio{
+	margin: 0 0 1% 0;
+}

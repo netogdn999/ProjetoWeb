@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.Formulario{
+	position: relative;
+	margin: 2% 0 0 10%;
+}
+
+#Formulario{
+	display: none;
+}
+
+.inputCFornecedor{
+	position: relative;
+	padding: 0.5%;
+	margin-bottom: 1%;
+}
+
+.labelCFornecedor{
+	position: relative;
+	font-size: 1.2em;
+}
+
+.inputCFornecedor1{
+	position: relative;
+	padding: 0.5%;
+	margin-right: 5%;
+}
+
+.labelCFornecedor1{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 36%;
+}
+
+.inputCFornecedorT{
+	position: relative;
+	padding: 0.5%;
+	margin-right: 20%;
+}
+
+.labelCFornecedorT{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 22.6%;
+}
+
+.pessoaFisica{
+	display: block;
+}
+
+.pessoaJuridica{
+	display: none;
+}
+
+.radio1{
+	margin: 0 15% 1% 0;
+}
+
+.radio{
+	margin: 0 0 1% 0;
+}

@@ -1,0 +1,362 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background-color: #ddd;
+}
+
+.header{
+	width: 100%;
+	height: 25%;
+	background-color: rgba(54,54,54,1);
+	position: absolute;
+}
+
+.logo{
+	width: 18%;
+	height: 52%;
+	/*border: 2px solid white;*/
+	position: relative;
+	margin: 0.3% 0 0 46%;
+}
+
+.logo img{
+	width: auto;
+	height: 100%;
+}
+
+.menu1{
+	position: relative;
+	float:left;
+	font-size: 1em;
+	margin: 0.4% 0.1% 0.5% 0;
+	list-style-type: none;
+	padding: 0.2% 0.3% 0.3% 0.3%;
+	background-color: rgba(105,105,105,1);
+}
+
+.menu2{
+	position: relative;
+	float:left;
+	font-size: 1em;
+	margin: 0.4% 0.1% 0.5% 0;
+	list-style-type: none;
+	padding: 0.2% 0.3% 0.3% 0.3%;
+	background-color: rgba(105,105,105,1);
+}
+
+.menu3{
+	position: relative;
+	float:left;
+	font-size: 1em;
+	margin: 0.4% 0.1% 0.5% 0;
+	list-style-type: none;
+	padding: 0.2% 0.3% 0.3% 0.3%;
+	background-color: rgba(105,105,105,1);
+}
+
+.menu4{
+	position: relative;
+	float:left;
+	font-size: 1em;
+	margin: 0.4% 0.1% 0.6% 0;
+	list-style-type: none;
+	padding: 0.2% 0.3% 0.3% 0.3%;
+	background-color: rgba(105,105,105,1);
+}
+
+.menu5{
+	position: relative;
+	float:left;
+	font-size: 1em;
+	margin: 0.4% 0.1% 0.6% 0;
+	list-style-type: none;
+	padding: 0.2% 66.65% 0.5% 0.3%;
+	background-color: rgba(105,105,105,1);
+}
+
+.menuHover{
+	background-color: rgba(105,105,105,1);
+	padding: 0.6% 10% 0.6% 10%;
+	border: 1px solid rgba(105,105,105,1);
+	position: relative;
+	border-radius: 3px;
+	
+	-webkit-transition: background-color 0.5s ease-in;
+	-webkit-transition: border 0.5s ease-in;
+	-moz-transition: background-color 0.5s ease-in;
+	-moz-transition: border 0.5s ease-in;
+	-o-transition: background-color 0.5s ease-in;
+	-o-transition: border 0.5s ease-in;
+	transition: background-color 0.5s ease-in;
+	transition: border 0.5s ease-in;
+}
+
+.menuHover:hover{
+	cursor: pointer;
+	background-image: linear-gradient(to bottom, rgba(54,54,54,1)10%,rgba(28,28,28,1));
+	border: 1px solid black;
+}
+
+.menuHover:active{
+	color: yellow;
+}
+
+.menu{
+	height: 20%;
+	color:white;
+	background-image: linear-gradient(to bottom, rgba(105,105,105,1)10%,rgba(79,79,79,1));
+	border-top: 1px solid rgba(130,130,130,1);
+	position: relative;
+	
+	-webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.subMenu{
+	height: 20%;
+	color:white;
+	background-image: linear-gradient(to bottom, rgba(105,105,105,1)10%,rgba(54,54,54,1));
+	border-top: 1px solid rgba(156,156,156,1);
+	position: relative;
+	display: none;
+	text-decoration: none;
+	
+	-webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.subMenu p:hover{
+	cursor: pointer;
+}
+
+#subMenu1{
+	display: block;
+}
+
+.botao{
+	position: relative;
+	margin: 0.2% 0 0.5% 3%;
+	float: left;
+}
+
+.botao a{
+	text-decoration: none;
+	color: white;
+}
+
+.section{
+	height: 82.5%;
+	width: 80%;
+	margin: 12.5% 10% 1.5% 10%;
+	position: absolute;
+	background-color: white; 
+}
+
+.section article{
+	position:relative;
+	margin: 0.5% 0;
+	height: 90%;
+	overflow: auto;
+}
+
+.botoes{
+	border-style: none;
+	background-color:rgba(50,205,50,1);
+	padding: 2% 5%;
+	margin: 6% 14% 0 15%;
+}
+
+.botoes:hover{
+	cursor: pointer;
+}
+
+.botoes:active{
+	color: white;
+	background-color: rgba(0,100,0,1);
+}
+
+.button{
+	position: relative;
+	height: 8%;
+	width: 10%;
+	float: right;
+	margin-right: 0.3%;
+	background-color: rgba(50,205,50,1);
+	display: none;
+	border-style: none;
+	
+	-webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   
+}
+
+.visualizarFornecedor{
+	position: relative;
+	background-color: rgba(50,205,50,1);
+	text-align: center;
+	width: 90%;
+	margin: 7% 0 0 5%;
+	color: white;
+}
+
+.visualizarFornecedor2{
+	position: relative;
+	width: 100%;
+}
+
+.visualizarFornecedor td{
+	padding: 1%;
+}
+
+.visualizar{
+	height: 60%;
+}
+
+.dados{
+	background-color: rgba(255,255,255,1);
+	text-align: left;
+	color:black;
+	
+	-webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.view{
+	position: relative;
+	background-color: white;
+	border-style: none;
+	height: 30px;
+	width: auto;
+	margin: 4% 0 -4% 28%;
+}
+
+.view img{
+	height: 100%;
+	width: auto;
+}
+
+.editar{
+	position: relative;
+	background-color: white;
+	border-style: none;
+	height: 30px;
+	width: auto;
+	margin: 4% 0 -4% 11.5%;
+}
+
+.editar img{
+	height: 100%;
+	width: auto;
+}
+
+.excluir{
+	position: relative;
+	background-color: white;
+	border-style: none;
+	height: 30px;
+	width: auto;
+	margin: 4% 0 -4% 11.5%;
+}
+
+.excluir img{
+	height: 100%;
+	width: auto;
+}
+
+.excluir:hover{
+	cursor: pointer;
+}
+
+.editar:hover{
+	cursor: pointer;
+}
+
+.view:hover{
+	cursor: pointer;
+}
+
+.window{
+	position: absolute;
+	display: none;
+	z-index: 10;
+	margin: 22% 0 0 38%;
+	width: 24%;
+	background-color: #ddd;
+	padding: 2%;
+}
+
+.sair{
+	position: absolute;
+	display: none;
+	z-index: 10;
+	margin: 22% 0 0 38%;
+	width: 24%;
+	background-color: #ddd;
+	padding: 2%;
+}
+
+.window h3{
+	text-align: left;
+	size: 1.5em;
+}
+
+.window p{
+	text-align: left;
+	size:1em;
+}
+
+#VF3{
+	width: 15%;
+}
+
+#CF3{
+	width: 17%;
+}
+
+#CF3 a{
+	text-decoration: none;
+	color: black;
+}
+
+#CF3:active a{
+	color: white;
+}
+
+.button:hover{
+	cursor: pointer;
+}
+
+.button:active{
+	color: white;
+	background-color: rgba(0,100,0,1);
+}
+
+.footer{
+	width: 99%;
+	padding: 0.5% 0.5%;
+	position: absolute;
+	background-color: black;
+	bottom: -90px;
+	color: white;
+}

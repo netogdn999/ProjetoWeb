@@ -1,0 +1,15 @@
+.classpath
+.project
+jar_files.zip
+mysql-connector-java-5.1.40-bin.jar
+build/classes/model/Fornecedor.class
+build/classes/model/Endereco.class
+build/classes/model/Contato.class
+build/classes/control/FornecedorDAO.class
+build/classes/control/BancoDeDados.class
+.settings/org.eclipse.wst.jsdt.ui.superType.name
+.settings/org.eclipse.wst.jsdt.ui.superType.container
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.settings/org.eclipse.wst.common.component
+.settings/org.eclipse.jdt.core.prefs
+.settings/.jsdtscope

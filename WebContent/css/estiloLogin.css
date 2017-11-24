@@ -1,0 +1,140 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	background-color: rgba(70,130,180,.7);
+}
+
+.logo{
+	margin-left: 31%;
+	height: 31%;
+	width: 31%;
+	margin-bottom: 3%;
+}
+
+.logo img{
+	height: 100%;
+	width: auto;
+}
+
+.corpo{
+	width: 24%;
+	height: 59%;
+	margin: 7% 38%;
+	padding: 1%;
+	background-color: rgba(232,232,232,.9);
+	float: left;
+	box-shadow: 0 0 23px black, inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
+	font-family: 'Comfortaa',sans-serif;
+	position: absolute;
+	
+ 	-moz-border-radius:9px;
+	-webkit-border-radius:9px;
+	-o-border-radius:9px;
+	-ms-border-radius:9px;
+ 	border-radius:9px; 
+}
+
+.telaLogin{
+	width: 97%;
+	height: 97%;
+	margin:0 3%;
+	margin-bottom: 15% 3%;
+	position: relative;
+}
+
+.label{
+	font-size: 1.1em;
+	margin:0 15%;
+	font-family: 'Comfortaa',sans-serif;
+}
+
+.input{
+	border-style:inset;
+	border-color: #5F9EA0;
+	margin:2% 15%;
+	padding:2%;
+}
+
+.corpo p{
+	color: red;
+	margin-left: 17%;
+	font-size: 0.7em;
+	display: none;
+}
+
+.botao{
+	padding: 1% 5%;
+	margin-top: 8%;
+	margin-left: 38%;
+	font-family: 'Comfortaa',sans-serif;
+	width:12%;
+	
+	background-color: rgba(135,206,235,.4);
+	box-shadow: 0 0 6px black, inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	-ms-border-radius:6px;
+ 	border-radius:6px;
+}
+
+.botao:hover{
+	cursor: pointer;
+}
+
+.botao:active{
+	background-color: rgba(70,130,180,.9);
+	box-shadow: 0 0 6px black, inset 0 2px 3px 0 rgba(70,130,180,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
+	color: white;
+}
+
+.popupExt{
+	z-index:10;
+	height: 100px;
+	width: 150px;
+	background-color: white;
+	border-top:10px solid white;
+    border-right:10px solid transparent;
+    background-clip: padding-box;
+    position: absolute;
+    margin:437px 0 0 490px;
+	border-top:15px solid white;
+    border-right:25px solid transparent;
+    background-clip: padding-box;
+    float:left;
+    border-radius: 10px;
+    display:none;
+}
+
+.popup{
+	height: 100%;
+	width: 100%;
+	color:red;
+	position: relative;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,1) 10%, rgba(255,0,0,.25));
+    border-radius: 10px 10px 0 10px;
+}
+
+.aviso{
+	margin: 6px 0 0 3px;
+	text-align: center;
+	float: left;
+}
+
+.fechar{
+	position: relative;
+	width: 17px;
+	float:left;
+	top:-15px;
+	height: auto;
+}
+
+.fechar:hover{
+	cursor: pointer;
+}
