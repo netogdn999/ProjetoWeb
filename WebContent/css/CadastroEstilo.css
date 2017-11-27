@@ -57,23 +57,30 @@ body{
 
 .label{
 	font-size: 1.1em;
-	margin:0 15%;
+	margin:0 27%;
 	font-family: 'Comfortaa',sans-serif;
 }
 
 .input{
 	border-style:inset;
 	border-color: #5F9EA0;
-	margin:2% 15%;
+	margin:2% 27%;
 	padding:1%;
+}
+
+.comboBox{
+	position: relative;
+	padding: 0.5%;
+	margin:2% 27%;
+	overflow-y: auto;
 }
 
 .botao{
 	padding: 1% 5%;
 	margin-top: 8%;
-	margin-left: 38%;
+	margin-left: 33%;
 	font-family: 'Comfortaa',sans-serif;
-	width:12%;
+	width:25%;
 	
 	background-color: rgba(135,206,235,.4);
 	box-shadow: 0 0 6px black, inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);

@@ -36,7 +36,7 @@
 			<br/>
 			<p id="campo2">Campo obrigatório</p>
 			<br/>
-			<a class="label" href="#">cadastrar usuario</a>
+			<a class="label" id="cadastrar" href="jsp/Cadastro.jsp">cadastrar usuario</a>
 			<div id="botao" class="botao">Login</div>
 			<% if(request.getParameter("usuario")!=null && request.getParameter("senha")!=null){
 					String login,pass;
