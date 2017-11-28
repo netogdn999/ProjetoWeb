@@ -41,6 +41,7 @@
 				<option value='Gerente'>Gerente</option>
 			</select>
 			<div id="botao" class="botao">Cadastrar</div>
+			<a href="../login.jsp"><div id="botao2" class="botao1">Logar</div>
 		</form>
 	</div>
 	</section>
