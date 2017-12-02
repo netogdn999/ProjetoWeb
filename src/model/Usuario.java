@@ -1,69 +1,69 @@
-package model;
+import java.util.ArrayList;
 
 public class Usuario {
 	private int id;
-	private String nome, login, senha, cpf;
-	private Setor setor;
+	private String nome, login, senha, cpf, setor;
 
-	public Usuario(String nome, String login, String senha, String cpf, Setor setor) throws Exception {
+	public Usuario() {}
+	public Usuario(String nome, String login, String senha, String cpf, String setor) throws ParametroInvalidoException, CpfInvalidoException {
 		setNome(nome);
 		setLogin(login);
 		setSenha(senha);
 		setCpf(cpf);
 		setSetor(setor);
 	}
-	public Usuario(int id, String nome, String login, String senha, String cpf, Setor setor) throws Exception {
+	public Usuario(int id, String nome, String login, String senha, String cpf, String setor) throws ParametroInvalidoException, CpfInvalidoException {
 		this(nome, login, senha, cpf, setor);
 		setId(id);
 	}
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) throws Exception {
+	public void setNome(String nome) throws ParametroInvalidoException {
 		if((nome != null) && (nome.trim().length() > 0)) {
 			this.nome = nome;
 		} else {
-			throw new Exception("Nome invalido");
+			throw new ParametroInvalidoException("Nome invalido");
 		}
 	}
 	public String getLogin() {
 		return login;
 	}
-	public void setLogin(String login) throws Exception {
+	public void setLogin(String login) throws ParametroInvalidoException {
 		if((login != null) && (login.trim().length() > 0)) {
 			this.login = login;
 		} else {
-			throw new Exception("Login invalido");
+			throw new ParametroInvalidoException("Login invalido");
 		}
 	}
 	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(String senha) throws Exception {
+	public void setSenha(String senha) throws ParametroInvalidoException {
 		if((senha != null) && (senha.trim().length() > 0)) {
 			this.senha = senha;
 		} else {
-			throw new Exception("Senha invalida");
+			throw new ParametroInvalidoException("Senha invalida");
 		}
 	}
 	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) throws Exception {
+	public void setCpf(String cpf) throws CpfInvalidoException {
 		if(validarCPF(cpf)) {
 			this.cpf = cpf;
 		} else {
-			throw new Exception("CPF invalido");
+			throw new CpfInvalidoException("CPF invalido");
 		}
 	}
-	public Setor getSetor() {
+	public String getSetor() {
 		return setor;
 	}
-	public void setSetor(Setor setor) throws Exception {
-		if(setor != null) {
+	public void setSetor(String setor) throws ParametroInvalidoException {
+		if((nome != null) && (nome.trim().length() > 0)) {
 			this.setor = setor;
 		} else {
-			throw new Exception("Setor invalido");
+			throw new ParametroInvalidoException("Setor invalido");
 		}
 	}
 	public boolean verificaSenha(String senha) {
@@ -137,5 +137,56 @@ public class Usuario {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void inserir(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		Usuario usu = new Usuario(bean.getId(), bean.getNome(),
+        		bean.getLogin(), bean.getSenha(),
+        		bean.getCpf(), bean.getSetor());
+		
+		UsuarioDAO dao = new UsuarioDAO();
+		
+		dao.inserir(bean.getNome(),
+        		bean.getLogin(), bean.getSenha(),
+        		bean.getCpf(), bean.getSetor());
+	}
+	public void atualizar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		Usuario usu = new Usuario(bean.getId(), bean.getNome(),
+        		bean.getLogin(), bean.getSenha(),
+        		bean.getCpf(), bean.getSetor());
+		
+		UsuarioDAO dao = new UsuarioDAO();
+		
+		dao.update(bean.getId(), bean.getNome(),
+        		bean.getLogin(), bean.getSenha(),
+        		bean.getCpf(), bean.getSetor());
+	}
+	public void deletar(UsuarioBean bean) throws DAOException, ParametroInvalidoException {
+		UsuarioDAO dao = new UsuarioDAO();
+		dao.delete(bean.getId());
+	}
+	public Usuario encontrar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		UsuarioDAO dao = new UsuarioDAO();
+		UsuarioBean usuBean = dao.encontrar(bean.getId());
+		Usuario usu = new Usuario(usuBean.getId(), usuBean.getNome(),
+				usuBean.getLogin(), usuBean.getSenha(),
+				usuBean.getCpf(), usuBean.getSetor());
+		return usu;
+	}
+	public Usuario encontrar(int idUsuario) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		UsuarioDAO dao = new UsuarioDAO();
+		UsuarioBean usuBean = dao.encontrar(idUsuario);
+		Usuario usu = new Usuario(usuBean.getId(), usuBean.getNome(),
+				usuBean.getLogin(), usuBean.getSenha(),
+				usuBean.getCpf(), usuBean.getSetor());
+		return usu;
+	}
+	public ArrayList<Usuario> mostrarTodas() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		UsuarioDAO dao = new UsuarioDAO();
+		ArrayList<UsuarioBean> usersBean = dao.mostrarTodos();
+		ArrayList<Usuario> usuarios = null;
+		for(UsuarioBean userB:usersBean) {
+			usuarios.add(encontrar(userB));
+		}
+		return usuarios;
 	}
 }
