@@ -192,12 +192,14 @@ public class Lance {
 		}
 		return lances;
 	}
-	public ArrayList<Lance> mostrarLancesPedido(int idPedidoCompra) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public Lance[] mostrarLancesPedido(int idPedidoCompra) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		LanceDAO dao = new LanceDAO();
 		ArrayList<LanceBean> pedsBean = dao.mostrarTodosLances(idPedidoCompra);
-		ArrayList<Lance> pedidos = null;
+		Lance[] pedidos = new Lance[pedsBean.size()];
+		int i=0;
 		for(LanceBean pedB:pedsBean) {
-			pedidos.add(encontrar(pedB));
+			pedidos[i]= (encontrar(pedB));
+			i++;
 		}
 		return pedidos;
 	}

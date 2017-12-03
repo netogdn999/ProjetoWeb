@@ -120,7 +120,7 @@ public class PedidoCompra {
 		Lance lance = new Lance();
 		Usuario user = new Usuario();
 		
-		PedidoCompra pedido = new PedidoCompra(bean.getId(), item.mostrarItensPedido(bean.getId()), lance.mostarLancesPedido(bean.getId()),bean.getDataInicio(),
+		PedidoCompra pedido = new PedidoCompra(bean.getId(), item.mostrarItensPedido(bean.getId()), lance.mostrarLancesPedido(bean.getId()),bean.getDataInicio(),
 				bean.getDataFim(), user.encontrar(bean.getIdUsuario()), bean.isInterno());
 		
 		return pedido;
