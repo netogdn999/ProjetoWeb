@@ -1,3 +1,5 @@
+package model;
+
 
 public class Setor {
 	private int id;

@@ -1,5 +1,15 @@
+package model;
+
 import java.sql.Date;
 import java.util.ArrayList;
+
+import model.CnpjInvalidoException;
+import model.CpfInvalidoException;
+import dao.DAOException;
+import model.EmailInvalidoException;
+import model.ParametroInvalidoException;
+import control.PedidoCompraBean;
+import dao.PedidoCompraDAO;
 
 public class PedidoCompra {
 	private int id;

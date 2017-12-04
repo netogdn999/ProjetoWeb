@@ -1,4 +1,15 @@
+package model;
+
 import java.util.ArrayList;
+
+import control.CategoriaBean;
+import model.CnpjInvalidoException;
+import model.CpfInvalidoException;
+import dao.DAOException;
+import model.EmailInvalidoException;
+import model.ParametroInvalidoException;
+import control.ProdutoBean;
+import dao.ProdutoDAO;
 
 public class Produto {
 	private int id;

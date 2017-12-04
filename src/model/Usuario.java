@@ -1,4 +1,13 @@
+package model;
+
 import java.util.ArrayList;
+import model.CnpjInvalidoException;
+import model.CpfInvalidoException;
+import dao.DAOException;
+import model.EmailInvalidoException;
+import model.ParametroInvalidoException;
+import control.UsuarioBean;
+import dao.UsuarioDAO;
 
 public class Usuario {
 	private int id;

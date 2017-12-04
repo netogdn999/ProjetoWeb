@@ -1,4 +1,14 @@
+package model;
+
 import java.util.ArrayList;
+
+import model.CnpjInvalidoException;
+import model.CpfInvalidoException;
+import dao.DAOException;
+import model.EmailInvalidoException;
+import control.ItemBean;
+import dao.ItemDAO;
+import model.ParametroInvalidoException;
 
 public class Item {
 	private int id;
@@ -68,12 +78,9 @@ public class Item {
 	}
 	public Item encontrar(ItemBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		ItemDAO dao = new ItemDAO();
-		
 		ItemBean itemBean = dao.encontrar(bean.getId(), bean.getIdPedidoCompra());
-
 		Produto produtoB = new Produto();
-		Item item = new Item(itemBean.getId(), produtoB.encontrar(itemBean.getIdProduto()),
-				itemBean.getQtd());
+		Item item = new Item(itemBean.getId(), produtoB.encontrar(itemBean.getIdProduto()),itemBean.getQtd());
 		
 		return item;
 	}

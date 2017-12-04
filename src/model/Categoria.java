@@ -1,4 +1,13 @@
+package model;
+
 import java.util.ArrayList;
+
+import control.CategoriaBean;
+import dao.CategoriaDAO;
+import dao.DAOException;
+import control.FornecedorBean;
+import model.ParametroInvalidoException;
+import control.ProdutoBean;
 
 public class Categoria {
 	private int id;

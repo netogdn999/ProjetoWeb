@@ -1,3 +1,4 @@
+package control;
 
 public class NotaBean {
 	private int id, nota, idUsuario, idFornecedor;

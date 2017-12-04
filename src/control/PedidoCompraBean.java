@@ -1,3 +1,5 @@
+package control;
+
 import java.sql.Date;
 
 public class PedidoCompraBean {

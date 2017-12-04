@@ -1,6 +1,20 @@
+package model;
+
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.Format;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import model.CnpjInvalidoException;
+import model.CpfInvalidoException;
+import dao.DAOException;
+import model.EmailInvalidoException;
+import control.LanceBean;
+import dao.LanceDAO;
+import model.ParametroInvalidoException;
 
 public class Lance {
 	private Fornecedor fornecedor;
@@ -116,7 +130,7 @@ public class Lance {
 	public void setForaDoPadrao(boolean isForaDoPadrao) {
 		this.isForaDoPadrao = isForaDoPadrao;
 	}
-	public void inserir(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void inserir(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException, ParseException {
 		Lance lance = new Lance();
 		setQtdParcelas(bean.getQtdParcelas()); 
 		setPrazoEntrega(bean.getPrazoEntrega());
@@ -125,7 +139,7 @@ public class Lance {
 		
 		dao.inserirProposta(bean.getIdPedidoCompra(), bean.getIdFornecedor(),
 				bean.getTotal(), bean.getQtdParcelas(), bean.getPrazoEntrega(),
-				lance.getData(), lance.isForaDoPadrao());
+				new Date(new SimpleDateFormat("dd-MM-yyyy").parse(lance.getData()).getTime()), lance.isForaDoPadrao());
 		//Acho que é a data que esta dando problema
 		
 		Item item = new Item();
@@ -138,7 +152,7 @@ public class Lance {
 		}
 		
 	}
-	public void atualizar(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void atualizar(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException, ParseException {
 		Lance lance = new Lance();
 		setQtdParcelas(bean.getQtdParcelas()); 
 		setPrazoEntrega(bean.getPrazoEntrega());
@@ -147,7 +161,7 @@ public class Lance {
 		
 		dao.updateProposta(bean.getIdPedidoCompra(), bean.getIdFornecedor(),
 				bean.getTotal(), bean.getQtdParcelas(), bean.getPrazoEntrega(),
-				lance.getData(), lance.isForaDoPadrao());
+				new Date(new SimpleDateFormat("dd-MM-yyyy").parse(lance.getData()).getTime()), lance.isForaDoPadrao());
 		//Acho que é a data que esta dando problema
 		
 		Item item = new Item();

@@ -1,3 +1,4 @@
+package control;
 
 public class CategoriaBean {
 	private int id;

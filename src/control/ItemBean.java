@@ -1,3 +1,4 @@
+package control;
 
 public class ItemBean {
 	private int id;

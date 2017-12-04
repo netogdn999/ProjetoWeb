@@ -1,3 +1,4 @@
+package control;
 
 public class FornecedorBean {
 	private int id;

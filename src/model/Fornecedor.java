@@ -1,6 +1,16 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import model.CnpjInvalidoException;
+import model.CpfInvalidoException;
+import dao.DAOException;
+import model.EmailInvalidoException;
+import control.FornecedorBean;
+import dao.FornecedorDAO;
+import model.ParametroInvalidoException;
 
 public class Fornecedor {
 	private int id;
