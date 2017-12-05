@@ -1,0 +1,68 @@
+
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#required:after{
+	content: " *";
+	color: red;
+}
+
+.Formulario{
+	position: relative;
+	margin: 10% 0 0 10%;
+}
+
+#Formulario{
+	display: none;
+}
+
+.inputCItem{
+	position: relative;
+	padding: 0.5%;
+	margin-bottom: 1%;
+}
+
+.labelCItem{
+	position: relative;
+	font-size: 1.2em;
+}
+
+
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#required:after{
+	content: " *";
+	color: red;
+}
+
+.Formulario{
+	position: relative;
+	margin: 10% 0 0 10%;
+}
+
+.inputCItem{
+	position: relative;
+	padding: 0.5%;
+	margin: 0.2% 3% 0 0;
+}
+
+.labelCItem{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 12%;
+}
+
+.labelCItem2{
+	position: relative;
+	font-size: 1.2em;
+	margin-left: -3%;
+}

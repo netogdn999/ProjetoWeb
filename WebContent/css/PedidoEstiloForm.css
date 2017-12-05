@@ -14,13 +14,13 @@
 	display: none;
 }
 
-.inputCUsuario{
+.inputCPedido{
 	position: relative;
 	padding: 0.5%;
 	margin-bottom: 1%;
 }
 
-.labelCUsuario{
+.labelCPedido{
 	position: relative;
 	font-size: 1.2em;
 }

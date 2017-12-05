@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=Comfortaa');
 
 *{
 	padding: 0;
@@ -11,10 +10,9 @@ body{
 }
 
 .logo{
-	margin-left: 31%;
-	height: 31%;
-	width: 31%;
-	margin-bottom: 3%;
+	margin-left: 42%;
+	height: 15%;
+	width: 29%;
 }
 
 .logo img{
@@ -23,14 +21,13 @@ body{
 }
 
 .corpo{
-	width: 24%;
-	height: 59%;
-	margin: 7% 38%;
+	width: 50%;
+	height: 79%;
+	margin: 4% 24%;
 	padding: 1%;
 	background-color: rgba(232,232,232,.9);
 	float: left;
 	box-shadow: 0 0 23px black, inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
-	font-family: 'Comfortaa',sans-serif;
 	position: absolute;
 	
  	-moz-border-radius:9px;
@@ -42,7 +39,7 @@ body{
 
 .corpo p{
 	color: red;
-	margin-left: 17%;
+	margin-left: 12%;
 	font-size: 0.7em;
 	display: none;
 }
@@ -50,38 +47,68 @@ body{
 .telaLogin{
 	width: 97%;
 	height: 97%;
-	margin:0 3%;
-	margin-bottom: 15% 3%;
+	margin:0 1%;
+	margin-bottom: 10%;
 	position: relative;
 }
 
-.label{
-	font-size: 1.1em;
-	margin:0 27%;
-	font-family: 'Comfortaa',sans-serif;
+.Formulario{
+	position: relative;
+	margin: 2% 0 0 10%;
 }
 
-.input{
-	border-style:inset;
-	border-color: #5F9EA0;
-	margin:2% 27%;
-	padding:1%;
-}
-
-.comboBox{
+.inputCFornecedor{
 	position: relative;
 	padding: 0.5%;
-	margin:2% 27%;
-	overflow-y: auto;
+	margin-bottom: 1%;
+}
+
+.labelCFornecedor{
+	position: relative;
+	font-size: 1.2em;
+}
+
+.inputCFornecedor1{
+	position: relative;
+	padding: 0.5%;
+	margin-right: 5%;
+}
+
+.labelCFornecedor1{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 54%;
+}
+
+.inputCFornecedorT{
+	position: relative;
+	padding: 0.5%;
+	margin-right: 45%;
+}
+
+.labelCFornecedorT{
+	position: relative;
+	font-size: 1.2em;
+	margin-right: 49.3%;
+}
+
+.pessoaJuridica{
+	display: none;
+}
+
+#required:after{
+	content: " *";
+	color: red;
 }
 
 .botao{
-	padding: 1% 5%;
-	margin-top: 8%;
-	margin-left: 10%;
-	font-family: 'Comfortaa',sans-serif;
-	width:25%;
+	padding: 1% 8%;
+	margin-top: 1%;
+	margin-left: 2%;
+	width:35%;
 	float:left;
+	border-style: none;
+	font-size: 1em;
 	
 	background-color: rgba(135,206,235,.4);
 	box-shadow: 0 0 6px black, inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
@@ -100,13 +127,13 @@ body{
 }
 
 .botao1{
-	padding: 1% 5%;
-	margin-top: 8%;
-	margin-left: 20%;
-	font-family: 'Comfortaa',sans-serif;
-	width:15%;
+	padding: 1% 0 1% 15%;
+	margin-top: 1%;
+	margin-left: 17%;
+	width:22%;
 	float:left;
 	color: black;
+	font-size: 1.1em;
 	
 	background-color: rgba(135,206,235,.4);
 	box-shadow: 0 0 6px black, inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);

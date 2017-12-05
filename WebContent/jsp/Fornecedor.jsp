@@ -44,7 +44,7 @@
 						"<label for='endereco' class='labelCFornecedor' id='required'>Número:</label>"+
 						"<br/>"+
 						"<input class='inputCFornecedor1' type='text' required='required' placeholder='seu endereco com o prefixo(Av.,Rua,etc...)' size='60' maxlength='100' name='endereco''/>"+
-						"<input class='inputCFornecedor' type='text' required='required' placeholder='Número' size='6' maxlength='6' name='numero'/>"+
+						"<input class='inputCFornecedor' type='number' required='required' placeholder='Número' size='6' maxlength='6' name='numero'/>"+
 						"<br/>"+
 						"<label for='complemento' class='labelCFornecedor'>Complemento:</label>"+
 						"<br/>"+
