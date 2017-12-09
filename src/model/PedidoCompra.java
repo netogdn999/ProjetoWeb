@@ -4,11 +4,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import model.CnpjInvalidoException;
-import model.CpfInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
 import model.ParametroInvalidoException;
+import control.CategoriaBean;
 import control.PedidoCompraBean;
+import control.UsuarioBean;
 import dao.PedidoCompraDAO;
 
 public class PedidoCompra {
@@ -98,7 +99,7 @@ public class PedidoCompra {
 	public void setInterno(boolean isInterno) {
 		this.isInterno = isInterno;
 	}
-	public void inserir(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void inserir(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		PedidoCompra pedido = new PedidoCompra();
 		pedido.setDataInicio(bean.getDataInicio());
 		pedido.setDataFim(bean.getDataFim());
@@ -106,9 +107,9 @@ public class PedidoCompra {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
 		
 		dao.inserir(bean.getDataInicio(), bean.getDataFim(),
-				bean.getIdUsuario(), bean.isInterno());
+				bean.getLoginUsuario(), bean.isInterno());
 	}
-	public void atualizar(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void atualizar(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		PedidoCompra pedido = new PedidoCompra();
 		pedido.setDataInicio(bean.getDataInicio());
 		pedido.setDataFim(bean.getDataFim());
@@ -116,41 +117,30 @@ public class PedidoCompra {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
 		
 		dao.update(bean.getId(), bean.getDataInicio(), bean.getDataFim(),
-				bean.getIdUsuario(), bean.isInterno());
+				bean.getLoginUsuario(), bean.isInterno());
 	}
 	public void deletar(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
 		dao.delete(bean.getId());	
 	}
-	public PedidoCompra encontrar(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public PedidoCompraBean encontrar(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
 		PedidoCompraBean fornBean = dao.encontrar(bean.getId());
-		
-		Item item = new Item();
-		Lance lance = new Lance();
-		Usuario user = new Usuario();
-		
-		PedidoCompra pedido = new PedidoCompra(bean.getId(), item.mostrarItensPedido(bean.getId()), lance.mostrarLancesPedido(bean.getId()),bean.getDataInicio(),
-				bean.getDataFim(), user.encontrar(bean.getIdUsuario()), bean.isInterno());
-		
-		return pedido;
+		return fornBean;
 	}
-	public ArrayList<PedidoCompra> mostrarTodos() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ArrayList<PedidoCompraBean> mostrarTodos() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
 		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarTodos();
-		ArrayList<PedidoCompra> pedidos = null;
-		for(PedidoCompraBean pedB:pedsBean) {
-			pedidos.add(encontrar(pedB));
-		}
-		return pedidos;
+		return pedsBean;
 	}
-	public ArrayList<PedidoCompra> mostrarPedidosCategoria(int idCategoria) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ArrayList<PedidoCompraBean> mostrarPedidosCategoria(CategoriaBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
-		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosCategoria(idCategoria);
-		ArrayList<PedidoCompra> pedidos = null;
-		for(PedidoCompraBean pedB:pedsBean) {
-			pedidos.add(encontrar(pedB));
-		}
-		return pedidos;
+		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosCategoria(bean.getId());
+		return pedsBean;
+	}
+	public ArrayList<PedidoCompraBean> mostrarPedidosUsuario(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		PedidoCompraDAO dao = new PedidoCompraDAO();
+		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosUsuario(bean.getLogin());
+		return pedsBean;
 	}
 }

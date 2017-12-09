@@ -1,12 +1,13 @@
 package control;
 
 public class NotaBean {
-	private int id, nota, idUsuario, idFornecedor;
-	private String descricao;
+	private int id, nota, idFornecedor;
+	private String descricao, loginUsuario;
 	
-	public NotaBean(int id, int nota, String descricao, int idUsuario, int idFornecedor) {
+	public NotaBean() { }
+	public NotaBean(int id, int nota, String descricao, String loginUsuario, int idFornecedor) {
 		this(id, nota, descricao);
-		this.idUsuario = idUsuario;
+		this.loginUsuario = loginUsuario;
 		this.idFornecedor = idFornecedor;
 	}
 	public NotaBean(int id, int nota, String descricao) {
@@ -33,17 +34,17 @@ public class NotaBean {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 	public int getIdFornecedor() {
 		return idFornecedor;
 	}
 	public void setIdFornecedor(int idFornecedor) {
 		this.idFornecedor = idFornecedor;
+	}
+	public String getLoginUsuario() {
+		return loginUsuario;
+	}
+	public void setLoginUsuario(String loginUsuario) {
+		this.loginUsuario = loginUsuario;
 	}
 	
 }

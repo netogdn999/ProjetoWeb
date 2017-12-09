@@ -9,10 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import model.CnpjInvalidoException;
-import model.CpfInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
+import control.ItemBean;
 import control.LanceBean;
+import control.PedidoCompraBean;
 import dao.LanceDAO;
 import model.ParametroInvalidoException;
 
@@ -130,7 +131,7 @@ public class Lance {
 	public void setForaDoPadrao(boolean isForaDoPadrao) {
 		this.isForaDoPadrao = isForaDoPadrao;
 	}
-	public void inserir(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException, ParseException {
+	public void inserir(LanceBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException, ParseException {
 		Lance lance = new Lance();
 		setQtdParcelas(bean.getQtdParcelas()); 
 		setPrazoEntrega(bean.getPrazoEntrega());
@@ -144,15 +145,18 @@ public class Lance {
 		
 		Item item = new Item();
 		
+		PedidoCompraBean pcb = new PedidoCompraBean();
+		pcb.setId(bean.getIdPedidoCompra());
+		
 		int i=0;
-		for(Item it: item.mostrarItensPedido(bean.getIdPedidoCompra())) {
+		for(ItemBean it: item.mostrarItensPedido(pcb)) {
 			dao.inserirLance(it.getId(), bean.getIdPedidoCompra(),
 					bean.getIdFornecedor(), bean.getLances()[i]);
 			i++;
 		}
 		
 	}
-	public void atualizar(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException, ParseException {
+	public void atualizar(LanceBean bean) throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException, ParseException {
 		Lance lance = new Lance();
 		setQtdParcelas(bean.getQtdParcelas()); 
 		setPrazoEntrega(bean.getPrazoEntrega());
@@ -166,8 +170,11 @@ public class Lance {
 		
 		Item item = new Item();
 		
+		PedidoCompraBean pcb = new PedidoCompraBean();
+		pcb.setId(bean.getIdPedidoCompra());
+		
 		int i=0;
-		for(Item it: item.mostrarItensPedido(bean.getIdPedidoCompra())) {
+		for(ItemBean it: item.mostrarItensPedido(pcb)) {
 			dao.updateLance(it.getId(), bean.getIdPedidoCompra(),
 					bean.getIdFornecedor(), bean.getLances()[i]);
 			i++;
@@ -177,7 +184,7 @@ public class Lance {
 		LanceDAO dao = new LanceDAO();
 		dao.deleteProposta(bean.getIdPedidoCompra(), bean.getIdFornecedor());
 	}
-	public Lance encontrar(LanceBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	private float[] encontrarValoresLances(LanceBean bean) throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException {
 		LanceDAO dao = new LanceDAO();
 		LanceBean lanceBean = dao.encontrarProposta(bean.getIdPedidoCompra(), bean.getIdFornecedor());
 	
@@ -190,31 +197,47 @@ public class Lance {
 			i++;
 		}
 		
-		Fornecedor forn = new Fornecedor();
+		//Fornecedor forn = new Fornecedor();
+		//lanceBean.setLances(lances);
+		//Lance lance = new Lance(forn.encontrar(lanceBean.getIdFornecedor()), lanceBean.getQtdParcelas(), 
+				//lanceBean.getPrazoEntrega(), lances);
 		
-		Lance lance = new Lance(forn.encontrar(lanceBean.getIdFornecedor()), lanceBean.getQtdParcelas(), 
-				lanceBean.getPrazoEntrega(), lances);
-		
-		return lance;
-	}
-	public ArrayList<Lance> mostrarTodos() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		LanceDAO dao = new LanceDAO();
-		ArrayList<LanceBean> lancesBean = dao.mostrarTodasPropostas();
-		ArrayList<Lance> lances = null;
-		for(LanceBean lanB:lancesBean) {
-			lances.add(encontrar(lanB));
-		}
 		return lances;
 	}
-	public Lance[] mostrarLancesPedido(int idPedidoCompra) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public LanceBean encontrar(LanceBean bean) throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException {
 		LanceDAO dao = new LanceDAO();
-		ArrayList<LanceBean> pedsBean = dao.mostrarTodosLances(idPedidoCompra);
-		Lance[] pedidos = new Lance[pedsBean.size()];
+		LanceBean lanceBean = dao.encontrarProposta(bean.getIdPedidoCompra(), bean.getIdFornecedor());
+	
+		ArrayList<Float> lancesF = dao.mostrarTodosLances(lanceBean.getIdPedidoCompra(),
+					lanceBean.getIdFornecedor());
 		int i=0;
-		for(LanceBean pedB:pedsBean) {
-			pedidos[i]= (encontrar(pedB));
+		float[] lances = new float[lancesF.size()];
+		for(Float lance: lancesF) {
+			lances[i]= lance;
 			i++;
 		}
-		return pedidos;
+		
+		//Fornecedor forn = new Fornecedor();
+		lanceBean.setLances(lances);
+		//Lance lance = new Lance(forn.encontrar(lanceBean.getIdFornecedor()), lanceBean.getQtdParcelas(), 
+				//lanceBean.getPrazoEntrega(), lances);
+		
+		return lanceBean;
+	}
+	public ArrayList<LanceBean> mostrarTodos() throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException {
+		LanceDAO dao = new LanceDAO();
+		ArrayList<LanceBean> lancesBean = dao.mostrarTodasPropostas();
+		for(LanceBean lanB:lancesBean) {
+			lanB.setLances(encontrarValoresLances(lanB));
+		}
+		return lancesBean;
+	}
+	public ArrayList<LanceBean> mostrarLancesPedido(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException {
+		LanceDAO dao = new LanceDAO();
+		ArrayList<LanceBean> lancesBean = dao.mostrarTodosLances(bean.getId());
+		for(LanceBean lanB:lancesBean) {
+			lanB.setLances(encontrarValoresLances(lanB));
+		}
+		return lancesBean;
 	}
 }

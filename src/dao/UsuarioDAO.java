@@ -11,25 +11,26 @@ import control.UsuarioBean;
 public class UsuarioDAO {
 	
 	private UsuarioBean map(ResultSet rs) throws SQLException {
-        UsuarioBean resultado = new UsuarioBean(rs.getInt("id"), rs.getString("nome"),
+        UsuarioBean resultado = new UsuarioBean(rs.getInt("id_fornecedor"), rs.getString("nome"),
         		rs.getString("login"), rs.getString("senha"),
-        		rs.getString("cpf"), rs.getString("setor"));
+        		rs.getInt("privilegio"), rs.getString("setor"));
         return resultado;
     }
 	
-	public void inserir(String nome, String login, String senha, String cpf, String setor) throws DAOException{
+	public void inserir(int idFornecedor, String nome, String login, String senha, int privilegio, String setor) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String insert_sql = "insert into usuario (nome, login, senha, cpf, setor) values (?, ?, ?, ?, ?)";
+            String insert_sql = "insert into usuario (nome, login, senha, privilegio, setor, id_fornecedor) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
             //Passando os paramentros para o SQL
             pst.setString(1, nome);
             pst.setString(2, login);
             pst.setString(3, senha);
-            pst.setString(4, cpf);
+            pst.setInt(4, privilegio);
             pst.setString(5, setor);
+            pst.setInt(6, idFornecedor);
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -45,20 +46,20 @@ public class UsuarioDAO {
         }
 	}
 	
-	public void update(int id, String nome, String login, String senha, String cpf, String setor) throws DAOException{
+	public void update(int idFornecedor, String nome, String login, String senha, int privilegio, String setor) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String insert_sql = "update usuario set nome = ?, login = ?, senha = ?, cpf = ?, setor = ? where id = ?";
+            String insert_sql = "update usuario set nome = ?, id_fornecedor = ?, senha = ?, privilegio = ?, setor = ? where login = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
             //Passando os paramentros para o SQL
             pst.setString(1, nome);
-            pst.setString(2, login);
+            pst.setInt(2, idFornecedor);
             pst.setString(3, senha);
-            pst.setString(4, cpf);
+            pst.setInt(4, privilegio);
             pst.setString(5, setor);
-            pst.setInt(6, id);
+            pst.setString(6, login);
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -74,13 +75,13 @@ public class UsuarioDAO {
         }
     }
 
-    public void delete(int id) throws DAOException{
+    public void delete(String login) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String sql = "delete from usuario where id = ?";
+            String sql = "delete from usuario where login = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
+            pst.setString(1, login);
             pst.executeUpdate();
             pst.close();
             con.close();
@@ -97,15 +98,15 @@ public class UsuarioDAO {
         }
     }
 
-	public UsuarioBean encontrar(int id) throws DAOException{
+	public UsuarioBean encontrar(String login) throws DAOException{
         Connection con = null;
         UsuarioBean usuario = null;
                 
         try {
             con = ConnectionFactory.getConnection();
-            String sql = "select * from usuario where id = ?";
+            String sql = "select * from usuario where login = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
+            pst.setString(1, login);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
             	usuario = map(rs);

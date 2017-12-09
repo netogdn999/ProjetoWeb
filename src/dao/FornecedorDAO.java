@@ -10,37 +10,32 @@ public class FornecedorDAO {
 	private FornecedorBean map(ResultSet rs) throws SQLException {
         FornecedorBean resultado = new FornecedorBean(rs.getInt("id"),
         		rs.getString("nome_fantasia"), rs.getString("razao_social"),
-        		rs.getString("cnpj"), rs.getString("cpf"), rs.getString("email"),
+        		rs.getString("cnpj"), rs.getString("email"),
         		rs.getString("endereco"), rs.getString("cep"),
         		rs.getString("telefone1"), rs.getString("telefone2"),
-        		rs.getString("responsavel"), rs.getString("login"),
-        		rs.getString("senha"));
+        		rs.getBoolean("is_autenticado"));
         return resultado;
     }
 	
 	public void inserir(String nomeFantasia,String razaoSocial, 
-			String cnpj, String cpf, String email, String endereco, String cep,
-			String telefone1, String telefone2, String responsavel,
-			String login, String senha) throws DAOException{
+			String cnpj, String email, String endereco, String cep,
+			String telefone1, String telefone2, boolean isAutenticado) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String insert_sql = "insert into fornecedor (nome_fantasia, razao_social, cnpj, cpf, email, endereco, cep, telefone1, telefone2, responsavel, login, senha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String insert_sql = "insert into fornecedor (nome_fantasia, razao_social, cnpj, email, endereco, cep, telefone1, telefone2, is_autenticado) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
             //Passando os paramentros para o SQL
             pst.setString(1, nomeFantasia);
             pst.setString(2, razaoSocial);
             pst.setString(3, cnpj);
-            pst.setString(4, cpf);
-            pst.setString(5, email);
-            pst.setString(6, endereco);
-            pst.setString(7, cep);
-            pst.setString(8, telefone1);
-            pst.setString(9, telefone2);
-            pst.setString(10, responsavel);
-            pst.setString(11, login);
-            pst.setString(12, senha);
+            pst.setString(4, email);
+            pst.setString(5, endereco);
+            pst.setString(6, cep);
+            pst.setString(7, telefone1);
+            pst.setString(8, telefone2);
+            pst.setBoolean(9, isAutenticado);
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -57,29 +52,25 @@ public class FornecedorDAO {
 	}
 	
 	public void update(int id, String nomeFantasia,String razaoSocial, 
-			String cnpj, String cpf, String email, String endereco, String cep,
-			String telefone1, String telefone2, String responsavel,
-			String login, String senha) throws DAOException{
+			String cnpj, String email, String endereco, String cep,
+			String telefone1, String telefone2, boolean isAutenticado) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String insert_sql = "update fornecedor set nome_fantasia = ?, razao_social = ?, cnpj = ?, cpf = ?, email = ?, endereco = ?, cep = ?, telefone1 = ?, telefone2 = ?, responsavel = ?, login = ?, senha  = ? where id = ?";
+            String insert_sql = "update fornecedor set nome_fantasia = ?, razao_social = ?, cnpj = ?, email = ?, endereco = ?, cep = ?, telefone1 = ?, telefone2 = ?, is_autenticado  = ? where id = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
             //Passando os paramentros para o SQL
             pst.setString(1, nomeFantasia);
             pst.setString(2, razaoSocial);
             pst.setString(3, cnpj);
-            pst.setString(4, cpf);
-            pst.setString(5, email);
-            pst.setString(6, endereco);
-            pst.setString(7, cep);
-            pst.setString(8, telefone1);
-            pst.setString(9, telefone2);
-            pst.setString(10, responsavel);
-            pst.setString(11, login);
-            pst.setString(12, senha);
-            pst.setInt(13, id);
+            pst.setString(4, email);
+            pst.setString(5, endereco);
+            pst.setString(6, cep);
+            pst.setString(7, telefone1);
+            pst.setString(8, telefone2);
+            pst.setBoolean(9, isAutenticado);
+            pst.setInt(10, id);
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {

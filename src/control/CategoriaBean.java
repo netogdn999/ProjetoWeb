@@ -4,6 +4,9 @@ public class CategoriaBean {
 	private int id;
 	private String nome;
 	
+	public CategoriaBean() {
+		
+	}
 	public CategoriaBean(int id, String nome) {
 		super();
 		this.id = id;

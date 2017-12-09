@@ -14,11 +14,11 @@ public class PedidoCompraDAO {
 	private PedidoCompraBean map(ResultSet rs) throws SQLException {
         PedidoCompraBean resultado = new PedidoCompraBean(rs.getInt("id"),
         		rs.getDate("data_inicio"), rs.getDate("data_fim"),
-        		rs.getInt("id_usuario"), rs.getBoolean("is_interno"));
+        		rs.getString("id_usuario"), rs.getBoolean("is_interno"));
         return resultado;
     }
 	
-	public void inserir(Date dataInicio, Date dataFim, int idUsuario,
+	public void inserir(Date dataInicio, Date dataFim, String idUsuario,
 			boolean isInterno) throws DAOException{
         Connection con = null;
         try {
@@ -29,7 +29,7 @@ public class PedidoCompraDAO {
             //Passando os paramentros para o SQL
             pst.setDate(1, dataInicio);
             pst.setDate(2, dataFim);
-            pst.setInt(3, idUsuario);
+            pst.setString(3, idUsuario);
             pst.setBoolean(4, isInterno);
             //Executando os comandos
             pst.executeUpdate();
@@ -46,7 +46,7 @@ public class PedidoCompraDAO {
         }
 	}
 	
-	public void update(int id, Date dataInicio, Date dataFim, int idUsuario,
+	public void update(int id, Date dataInicio, Date dataFim, String idUsuario,
 			boolean isInterno) throws DAOException{
         Connection con = null;
         try {
@@ -57,7 +57,7 @@ public class PedidoCompraDAO {
             //Passando os paramentros para o SQL
             pst.setDate(1, dataInicio);
             pst.setDate(2, dataFim);
-            pst.setInt(3, idUsuario);
+            pst.setString(3, idUsuario);
             pst.setBoolean(4, isInterno);
             pst.setInt(5, id);
             //Executando os comandos
@@ -133,6 +133,31 @@ public class PedidoCompraDAO {
             String sql = "select * from pedido_compra";
             PreparedStatement pst = con.prepareStatement(sql);
             
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                pedido_compraes.add(map(rs));
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Operação não realizada com sucesso.", e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                throw new DAOException("Não foi possível fechar a conexão.", e);
+            }
+        }
+        return pedido_compraes;
+    }
+	public ArrayList<PedidoCompraBean> mostrarPedidosUsuario(String idUsuario) throws DAOException {
+        Connection con = null;
+        ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
+        try {
+            con = ConnectionFactory.getConnection();
+            String sql = "select * from pedido_compra where id_usuario = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, idUsuario);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 pedido_compraes.add(map(rs));

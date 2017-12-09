@@ -12,6 +12,7 @@ public class LanceBean {
 	//private String horario;
 	private boolean isForaDoPadrao;
 	
+	public LanceBean() { }
 	public LanceBean(int idPedidoCompra, int idFornecedor, float total, int qtdParcelas, int prazoEntrega,
 			Date dataLance, boolean isForaDoPadrao) {
 		super();

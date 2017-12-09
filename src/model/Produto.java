@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import control.CategoriaBean;
 import model.CnpjInvalidoException;
-import model.CpfInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
 import model.ParametroInvalidoException;
@@ -67,7 +66,7 @@ public class Produto {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void inserir(ProdutoBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void inserir(ProdutoBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		Produto usu = new Produto(bean.getId(), bean.getNome(),
 				bean.getMarca());
 		
@@ -76,7 +75,7 @@ public class Produto {
 		dao.inserir(bean.getNome(),
 				bean.getMarca(), bean.getIdCategoria());
 	}
-	public void atualizar(ProdutoBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void atualizar(ProdutoBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		Produto usu = new Produto(bean.getId(), bean.getNome(),
 				bean.getMarca());
 		
@@ -89,38 +88,19 @@ public class Produto {
 		ProdutoDAO dao = new ProdutoDAO();
 		dao.delete(bean.getId());
 	}
-	public Produto encontrar(ProdutoBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ProdutoBean encontrar(ProdutoBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		ProdutoDAO dao = new ProdutoDAO();
 		ProdutoBean prodBean = dao.encontrar(bean.getId());
-		Categoria cat = new Categoria();
-		Produto produto = new Produto(bean.getId(), bean.getNome(),
-				bean.getMarca(), cat.mostrarCategoriaProduto(prodBean));
-		return produto;
+		return prodBean;
 	}
-	public Produto encontrar(int idProduto) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		ProdutoDAO dao = new ProdutoDAO();
-		ProdutoBean prodBean = dao.encontrar(idProduto);
-		Categoria cat = new Categoria();
-		Produto produto = new Produto(prodBean.getId(), prodBean.getNome(),
-				prodBean.getMarca(), cat.mostrarCategoriaProduto(prodBean));
-		return produto;
-	}
-	public ArrayList<Produto> mostrarTodas() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ArrayList<ProdutoBean> mostrarTodas() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		ProdutoDAO dao = new ProdutoDAO();
 		ArrayList<ProdutoBean> prodsBean = dao.mostrarTodos();
-		ArrayList<Produto> produtos = null;
-		for(ProdutoBean prodB:prodsBean) {
-			produtos.add(encontrar(prodB));
-		}
-		return produtos;
+		return prodsBean;
 	}
-	public ArrayList<Produto> mostrarProdutosCategoria(CategoriaBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ArrayList<ProdutoBean> mostrarProdutosCategoria(CategoriaBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		ProdutoDAO dao = new ProdutoDAO();
 		ArrayList<ProdutoBean> prodsBean = dao.mostrarProdutosCategoria(bean.getId());
-		ArrayList<Produto> produtos = null;
-		for(ProdutoBean prodB:prodsBean) {
-			produtos.add(encontrar(prodB));
-		}
-		return produtos;
+		return prodsBean;
 	}
 }

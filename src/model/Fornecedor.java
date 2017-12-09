@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import model.CnpjInvalidoException;
-import model.CpfInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
 import control.FornecedorBean;
@@ -15,46 +14,28 @@ import model.ParametroInvalidoException;
 public class Fornecedor {
 	private int id;
 	private String nomeFantasia, razaoSocial, cnpj, email, endereco, cep, 
-					telefone1, telefone2, responsavel, login, senha, cpf;
+					telefone1, telefone2;
 	private Categoria[] categorias;
-	private boolean isEmpresa;
+	private boolean isAutenticado;
 	
 	
 	public Fornecedor() {
 		
 	}
-	private Fornecedor(String nomeFantasia, String razaoSocial, String email, String endereco, String cep, String telefone1, String responsavel, String login, String senha) throws ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException{
+	public Fornecedor(String nomeFantasia, String razaoSocial, String cnpj, String email, String endereco, String cep, String telefone1, boolean isAutenticado) throws ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
 		setNomeFantasia(nomeFantasia);
 		setRazaoSocial(razaoSocial);
 		setEndereco(endereco);
 		setCep(cep);
 		setEmail(email);
 		setTelefone1(telefone1);
-		setResponsavel(responsavel);
-		setLogin(login);
-		setSenha(senha);
+		setAutenticado(isAutenticado);
+		setCnpj(cnpj);
 	}
-	public Fornecedor(String nomeFantasia, String razaoSocial, String cnpjORcpf, String email, String endereco, String cep, String telefone1, String responsavel, String login, String senha, boolean isEmpresa) throws ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException{
-		this(nomeFantasia, razaoSocial, email, endereco, cep, telefone1, responsavel, login, senha);
-		setEmpresa(isEmpresa);
-		if(isEmpresa) {
-			setCnpj(cnpj);
-		} else {
-			setCpf(cpf);
-		}
-	}
-	public Fornecedor(String nomeFantasia, String razaoSocial, String cnpj, String email, String endereco, String cep, String telefone1, String responsavel, String login, String senha, Categoria[] categorias, boolean isEmpresa) throws ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException{
-		this(nomeFantasia, razaoSocial, cnpj, email, endereco, cep, telefone1, responsavel, login, senha, isEmpresa);
-		setCategorias(categorias);
-	}
-	public Fornecedor(int id, String nomeFantasia, String razaoSocial, String cnpj, String email, String endereco, String cep, String telefone1, String responsavel, String login, String senha, boolean isEmpresa) throws ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException{
-		this(nomeFantasia, razaoSocial, cnpj, email, endereco, cep, telefone1, responsavel, login, senha, isEmpresa);
+	public Fornecedor(int id, String nomeFantasia, String razaoSocial, String cnpj, String email, String endereco, String cep, String telefone1, String telefone2, boolean isAutenticado) throws ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		this(nomeFantasia, razaoSocial, cnpj, email, endereco, cep, telefone1, isAutenticado);
 		setId(id);
-	}
-	public Fornecedor(int id, String nomeFantasia, String razaoSocial, String cnpj, String cpf, String email, String endereco, String cep, String telefone1, String telefone2, String responsavel, String login, String senha, boolean isEmpresa) throws ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException{
-		this(id, nomeFantasia, razaoSocial, cnpj, email, endereco, cep, telefone1, responsavel, login, senha, isEmpresa);
 		setTelefone2(telefone2);
-		setCpf(cpf);
 	}
 	public String getNomeFantasia() {
 		return nomeFantasia;
@@ -84,16 +65,6 @@ public class Fornecedor {
 			this.cnpj = cnpj;
 		} else {
 			throw new CnpjInvalidoException("CNPJ invalido");
-		}
-	}
-	public String getCpf() {
-		return cnpj;
-	}
-	public void setCpf(String cpf) throws CpfInvalidoException {
-		if(validarCPF(cpf)) {
-			this.cpf = cpf;
-		} else {
-			throw new CpfInvalidoException("CPF invalido");
 		}
 	}
 	public String getEmail() {
@@ -148,42 +119,9 @@ public class Fornecedor {
 			throw new ParametroInvalidoException("Telefone 2 invalido");
 		}
 	}
-	public String getResponsavel() {
-		return responsavel;
-	}
-	public void setResponsavel(String responsavel) throws ParametroInvalidoException {
-		if((responsavel != null) && (responsavel.trim().length() > 0)) {
-			this.responsavel = responsavel;
-		} else {
-			throw new ParametroInvalidoException("Nome do responsavel invalido");
-		}
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) throws ParametroInvalidoException {
-		if((login != null) && (login.trim().length() > 0)) {
-			this.login = login;
-		} else {
-			throw new ParametroInvalidoException("Login invalido");
-		}
-	}
 	//public String getSenha() {
 	//	return senha;
 	//}
-	public void setSenha(String senha) throws ParametroInvalidoException {
-		if((senha != null) && (senha.trim().length() > 0)) {
-			this.senha = senha;
-		} else {
-			throw new ParametroInvalidoException("Senha invalido");
-		}
-	}
-	public boolean verificaSenha(String senha) {
-		if(this.senha.equals(senha)) {
-			return true;
-		}
-		return false;
-	}
 	//modificar senha e login
 	public Categoria[] getCategorias() {
 		return categorias;
@@ -191,72 +129,9 @@ public class Fornecedor {
 	public void setCategorias(Categoria[] categorias) {
 		this.categorias = categorias;
 	}
-	public boolean isEmpresa(){
-		return this.isEmpresa;
-	}
-	public void setEmpresa(boolean isEmpresa){
-		this.isEmpresa = isEmpresa;
-	}
 	
 	//^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$ essa aqui é para o e-mail
-	public boolean validarCPF(String CPF){
-		int i=0;
-		int j=0;
-		int b=10;
-		int cont=0;
-		int CPFNum=0;
-		int aux=0;
-		if(CPF.length()<11){
-			return false;
-		}
-		for(i=0;i<CPF.length()-1;i++){
-			j++;
-			if(CPF.charAt(i)=='.' || CPF.charAt(i)=='/' || CPF.charAt(i)=='-'){
-				continue;
-			}
-			if((((int)CPF.charAt(i))-48)==(((int)CPF.charAt(j))-48)){
-				cont++;
-			}else{
-				break;
-			}
-			if(cont>=11){
-				return false;
-			}
-		}
-		for(i=0; i<CPF.length()-2; i++){
-			if(CPF.charAt(i)=='.' || CPF.charAt(i)=='-'){
-				continue;
-			}else{
-				CPFNum=(((int)CPF.charAt(i))-48);
-				if(CPFNum>9 || CPFNum<0){
-					return false;
-				}else{
-					aux+=(CPFNum)*(b--);
-				}
-			}
-		}
-		aux=((aux*10)%11==10 || (aux*10)%11==11)?0:((aux*10)%11);
-		if(aux==(((int)CPF.charAt(CPF.length()-2))-48)){
-			aux=0;
-			b=11;
-			for(i=0; i<CPF.length()-1; i++){
-				if(CPF.charAt(i)=='.' || CPF.charAt(i)=='-'){
-					continue;
-				}else{
-					CPFNum=(((int)CPF.charAt(i))-48);
-					if(CPFNum>9 || CPFNum<0){
-						return false;
-					}else{
-						aux+=(CPFNum)*(b--);
-					}
-				}
-			}
-			aux=((aux*10)%11==10 || (aux*10)%11==11)?0:((aux*10)%11);
-			if((aux==(((int)CPF.charAt(CPF.length()-1))-48)))
-				return true;
-		}
-		return false;
-	}
+	
 	public boolean validarCNPJ(String CNPJ){
 		int i=0;
 		int j=0;
@@ -329,32 +204,29 @@ public class Fornecedor {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void inserir(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		Fornecedor forn = new Fornecedor(bean.getId(),bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
-				bean.getCpf(), bean.getEmail(), bean.getEndereco(), bean.getCep(),
-				bean.getTelefone1(), bean.getTelefone2(), bean.getResponsavel(),
-				bean.getLogin(), bean.getSenha(), bean.isEmpresa());
+	public void inserir(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		Fornecedor forn = new Fornecedor(bean.getId(),bean.getNomeFantasia(),
+				bean.getRazaoSocial(), bean.getCnpj(),
+				bean.getEmail(), bean.getEndereco(), bean.getCep(),
+				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
 		
 		FornecedorDAO dao = new FornecedorDAO();
 		dao.inserir(bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
-				bean.getCpf(), bean.getEmail(), bean.getEndereco(), bean.getCep(),
-				bean.getTelefone1(), bean.getTelefone2(), bean.getResponsavel(),
-				bean.getLogin(), bean.getSenha());
+				bean.getEmail(), bean.getEndereco(), bean.getCep(),
+				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
 		
 		Categoria cat = new Categoria();
 		cat.inserirFornecedorCategoria(bean);
 	}
-	public void atualizar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void atualizar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		Fornecedor forn = new Fornecedor(bean.getId(),bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
-				bean.getCpf(), bean.getEmail(), bean.getEndereco(), bean.getCep(),
-				bean.getTelefone1(), bean.getTelefone2(), bean.getResponsavel(),
-				bean.getLogin(), bean.getSenha(), bean.isEmpresa());
+				bean.getEmail(), bean.getEndereco(), bean.getCep(),
+				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
 		
 		FornecedorDAO dao = new FornecedorDAO();
 		dao.update(bean.getId(), bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
-				bean.getCpf(), bean.getEmail(), bean.getEndereco(), bean.getCep(),
-				bean.getTelefone1(), bean.getTelefone2(), bean.getResponsavel(),
-				bean.getLogin(), bean.getSenha());
+				bean.getEmail(), bean.getEndereco(), bean.getCep(),
+				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
 		
 		Categoria cat = new Categoria();
 		cat.inserirFornecedorCategoria(bean);
@@ -363,34 +235,18 @@ public class Fornecedor {
 		FornecedorDAO dao = new FornecedorDAO();
 		dao.delete(bean.getId());	
 	}
-	public Fornecedor encontrar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public FornecedorBean encontrar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		FornecedorDAO dao = new FornecedorDAO();
 		FornecedorBean fornBean = dao.encontrar(bean.getId());
-		if(fornBean.getCpf()==null) {
-			fornBean.setEmpresa(true);
-		}else {
-			fornBean.setEmpresa(false);
-		}
-		Fornecedor forn = new Fornecedor(fornBean.getId(),fornBean.getNomeFantasia(),
-				fornBean.getRazaoSocial(), fornBean.getCnpj(), fornBean.getCpf(),
-				fornBean.getEmail(), fornBean.getEndereco(), fornBean.getCep(),
-				fornBean.getTelefone1(), fornBean.getTelefone2(), fornBean.getResponsavel(),
-				fornBean.getLogin(), fornBean.getSenha(), fornBean.isEmpresa());
 		
-		Categoria cat = new Categoria();
-		forn.setCategorias(cat.mostrarCategoriasFornecedor(fornBean));
-		return forn;
+		return fornBean;
 	}
-	public Fornecedor encontrar(int idFornecedor) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	/*public Fornecedor encontrar(int idFornecedor) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		FornecedorDAO dao = new FornecedorDAO();
 		FornecedorBean fornBean = dao.encontrar(idFornecedor);
-		if(fornBean.getCpf()==null) {
-			fornBean.setEmpresa(true);
-		}else {
-			fornBean.setEmpresa(false);
-		}
+		
 		Fornecedor forn = new Fornecedor(fornBean.getId(),fornBean.getNomeFantasia(),
-				fornBean.getRazaoSocial(), fornBean.getCnpj(), fornBean.getCpf(),
+				fornBean.getRazaoSocial(), fornBean.getCnpj(),
 				fornBean.getEmail(), fornBean.getEndereco(), fornBean.getCep(),
 				fornBean.getTelefone1(), fornBean.getTelefone2(), fornBean.getResponsavel(),
 				fornBean.getLogin(), fornBean.getSenha(), fornBean.isEmpresa());
@@ -398,15 +254,18 @@ public class Fornecedor {
 		Categoria cat = new Categoria();
 		forn.setCategorias(cat.mostrarCategoriasFornecedor(fornBean));
 		return forn;
-	}
-	public ArrayList<Fornecedor> mostrarTodas() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	}*/
+	public ArrayList<FornecedorBean> mostrarTodas() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		FornecedorDAO dao = new FornecedorDAO();
 		ArrayList<FornecedorBean> fornBean = dao.mostrarTodos();
-		ArrayList<Fornecedor> fornecedores = null;
-		for(FornecedorBean fornB:fornBean) {
-			fornecedores.add(encontrar(fornB));
-		}
-		return fornecedores;
+		
+		return fornBean;
+	}
+	public boolean isAutenticado() {
+		return isAutenticado;
+	}
+	public void setAutenticado(boolean isAutenticado) {
+		this.isAutenticado = isAutenticado;
 	}
 
 }

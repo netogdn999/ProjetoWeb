@@ -12,12 +12,12 @@ public class NotaDAO {
 	
 	private NotaBean map(ResultSet rs) throws SQLException {
         NotaBean resultado = new NotaBean(rs.getInt("id"), rs.getInt("nota"), 
-        		rs.getString("nome"), rs.getInt("id_usuario"),
+        		rs.getString("nome"), rs.getString("id_usuario"),
         		rs.getInt("id_fornecedor"));
         return resultado;
     }
 	
-	public void inserir(int nota, String descricao, int idUsuario, int idFornecedor) throws DAOException{
+	public void inserir(int nota, String descricao, String idUsuario, int idFornecedor) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
@@ -27,7 +27,7 @@ public class NotaDAO {
             //Passando os paramentros para o SQL
             pst.setInt(1, nota);
             pst.setString(2, descricao);
-            pst.setInt(3, idUsuario);
+            pst.setString(3, idUsuario);
             pst.setInt(4, idFornecedor);
             //Executando os comandos
             pst.executeUpdate();
@@ -44,7 +44,7 @@ public class NotaDAO {
         }
 	}
 	
-	public void update(int id, int nota, String descricao, int idUsuario) throws DAOException{
+	public void update(int id, int nota, String descricao, String idUsuario) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
@@ -55,7 +55,7 @@ public class NotaDAO {
             pst.setInt(1, nota);
             pst.setString(2, descricao);
             pst.setInt(3, id);
-            pst.setInt(4, idUsuario);
+            pst.setString(4, idUsuario);
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -71,14 +71,14 @@ public class NotaDAO {
         }
     }
 
-    public void delete(int id, int idUsuario) throws DAOException{
+    public void delete(int id, String idUsuario) throws DAOException{
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
             String sql = "delete from nota where id = ? and id_usuario = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
-            pst.setInt(2, idUsuario);
+            pst.setString(2, idUsuario);
             pst.executeUpdate();
             pst.close();
             con.close();
@@ -95,7 +95,7 @@ public class NotaDAO {
         }
     }
 
-	public NotaBean encontrar(int id, int idUsuario) throws DAOException{
+	public NotaBean encontrar(int id, String idUsuario) throws DAOException{
         Connection con = null;
         NotaBean nota = null;
                 
@@ -104,7 +104,7 @@ public class NotaDAO {
             String sql = "select * from nota where id = ? and id_usuario = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
-            pst.setInt(2, idUsuario);
+            pst.setString(2, idUsuario);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
             	nota = map(rs);

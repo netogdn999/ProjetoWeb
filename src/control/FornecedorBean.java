@@ -3,13 +3,16 @@ package control;
 public class FornecedorBean {
 	private int id;
 	private String nomeFantasia, razaoSocial, cnpj, email, endereco, cep, 
-					telefone1, telefone2, responsavel, login, senha, cpf;
+					telefone1, telefone2;
 	private int[] categorias;
-	private boolean isEmpresa;
+	private boolean isAutenticado;
 	
+	public FornecedorBean() {
+		
+	}
 	public FornecedorBean(int id, String nomeFantasia, String razaoSocial, String cnpj,
-			String cpf, String email, String endereco, String cep, String telefone1,
-			String telefone2, String responsavel, String login, String senha) {
+			String email, String endereco, String cep, String telefone1,
+			String telefone2, boolean isAutenticado) {
 		super();
 		this.id = id;
 		this.nomeFantasia = nomeFantasia;
@@ -20,18 +23,14 @@ public class FornecedorBean {
 		this.cep = cep;
 		this.telefone1 = telefone1;
 		this.telefone2 = telefone2;
-		this.responsavel = responsavel;
-		this.login = login;
-		this.senha = senha;
-		this.cpf = cpf;
+		this.isAutenticado = isAutenticado;
 	}
 	public FornecedorBean(int id, String nomeFantasia, String razaoSocial, String cnpj, String cpf, String email, String endereco,
 			String cep, String telefone1, String telefone2, String responsavel, String login, String senha,
-			int[] categorias, boolean isEmpresa) {
-		this(id, nomeFantasia, razaoSocial, cnpj, cpf, email, endereco,
-				cep, telefone1, telefone2, responsavel, login, senha);
+			int[] categorias, boolean isAutenticado) {
+		this(id, nomeFantasia, razaoSocial, cnpj, email, endereco,
+				cep, telefone1, telefone2, isAutenticado);
 		this.categorias = categorias;
-		this.isEmpresa = isEmpresa;
 	}
 	public int getId() {
 		return id;
@@ -87,40 +86,16 @@ public class FornecedorBean {
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
-	public String getResponsavel() {
-		return responsavel;
-	}
-	public void setResponsavel(String responsavel) {
-		this.responsavel = responsavel;
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 	public int[] getCategorias() {
 		return categorias;
 	}
 	public void setCategorias(int[] categorias) {
 		this.categorias = categorias;
 	}
-	public boolean isEmpresa() {
-		return isEmpresa;
+	public boolean isAutenticado() {
+		return isAutenticado;
 	}
-	public void setEmpresa(boolean isEmpresa) {
-		this.isEmpresa = isEmpresa;
+	public void setAutenticado(boolean isAutenticado) {
+		this.isAutenticado = isAutenticado;
 	}
 }

@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import model.CnpjInvalidoException;
-import model.CpfInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
 import model.ParametroInvalidoException;
@@ -10,20 +9,21 @@ import control.UsuarioBean;
 import dao.UsuarioDAO;
 
 public class Usuario {
-	private int id;
-	private String nome, login, senha, cpf, setor;
+	private int idFornecedor;
+	private String nome, login, senha, setor;
+	private int privilegio; // 1 - administrador, 2 - funcionario, 3 - fornecedor
 
 	public Usuario() {}
-	public Usuario(String nome, String login, String senha, String cpf, String setor) throws ParametroInvalidoException, CpfInvalidoException {
+	public Usuario(String nome, String login, String senha, int privilegio, String setor) throws ParametroInvalidoException {
 		setNome(nome);
 		setLogin(login);
 		setSenha(senha);
-		setCpf(cpf);
+		setPrivilegio(privilegio);
 		setSetor(setor);
 	}
-	public Usuario(int id, String nome, String login, String senha, String cpf, String setor) throws ParametroInvalidoException, CpfInvalidoException {
-		this(nome, login, senha, cpf, setor);
-		setId(id);
+	public Usuario(int idFornecedor, String nome, String login, String senha, int privilegio, String setor) throws ParametroInvalidoException {
+		this(nome, login, senha, privilegio, setor);
+		setIdFornecedor(idFornecedor);
 	}
 	public String getNome() {
 		return nome;
@@ -55,25 +55,12 @@ public class Usuario {
 			throw new ParametroInvalidoException("Senha invalida");
 		}
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) throws CpfInvalidoException {
-		if(validarCPF(cpf)) {
-			this.cpf = cpf;
-		} else {
-			throw new CpfInvalidoException("CPF invalido");
-		}
-	}
+	
 	public String getSetor() {
 		return setor;
 	}
-	public void setSetor(String setor) throws ParametroInvalidoException {
-		if((nome != null) && (nome.trim().length() > 0)) {
-			this.setor = setor;
-		} else {
-			throw new ParametroInvalidoException("Setor invalido");
-		}
+	public void setSetor(String setor){
+		this.setor = setor;
 	}
 	public boolean verificaSenha(String senha) {
 		if(this.senha.equals(senha)) {
@@ -82,120 +69,75 @@ public class Usuario {
 		return false;
 	}
 	//modificar senha e login
-	
-	public boolean validarCPF(String CPF){
-		int i=0;
-		int j=0;
-		int b=10;
-		int cont=0;
-		int CPFNum=0;
-		int aux=0;
-		if(CPF.length()<11){
-			return false;
-		}
-		for(i=0;i<CPF.length()-1;i++){
-			j++;
-			if(CPF.charAt(i)=='.' || CPF.charAt(i)=='/' || CPF.charAt(i)=='-'){
-				continue;
-			}
-			if((((int)CPF.charAt(i))-48)==(((int)CPF.charAt(j))-48)){
-				cont++;
-			}else{
-				break;
-			}
-			if(cont>=11){
-				return false;
-			}
-		}
-		for(i=0; i<CPF.length()-2; i++){
-			if(CPF.charAt(i)=='.' || CPF.charAt(i)=='-'){
-				continue;
-			}else{
-				CPFNum=(((int)CPF.charAt(i))-48);
-				if(CPFNum>9 || CPFNum<0){
-					return false;
-				}else{
-					aux+=(CPFNum)*(b--);
-				}
-			}
-		}
-		aux=((aux*10)%11==10 || (aux*10)%11==11)?0:((aux*10)%11);
-		if(aux==(((int)CPF.charAt(CPF.length()-2))-48)){
-			aux=0;
-			b=11;
-			for(i=0; i<CPF.length()-1; i++){
-				if(CPF.charAt(i)=='.' || CPF.charAt(i)=='-'){
-					continue;
-				}else{
-					CPFNum=(((int)CPF.charAt(i))-48);
-					if(CPFNum>9 || CPFNum<0){
-						return false;
-					}else{
-						aux+=(CPFNum)*(b--);
-					}
-				}
-			}
-			aux=((aux*10)%11==10 || (aux*10)%11==11)?0:((aux*10)%11);
-			if((aux==(((int)CPF.charAt(CPF.length()-1))-48)))
-				return true;
-		}
-		return false;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public void inserir(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		Usuario usu = new Usuario(bean.getId(), bean.getNome(),
+	public void inserir(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		Usuario usu = new Usuario(bean.getIdFornecedor(), bean.getNome(),
         		bean.getLogin(), bean.getSenha(),
-        		bean.getCpf(), bean.getSetor());
+        		bean.getPrivilegio(), bean.getSetor());
 		
 		UsuarioDAO dao = new UsuarioDAO();
 		
-		dao.inserir(bean.getNome(),
+		dao.inserir(bean.getIdFornecedor(), bean.getNome(),
         		bean.getLogin(), bean.getSenha(),
-        		bean.getCpf(), bean.getSetor());
+        		bean.getPrivilegio(), bean.getSetor());
 	}
-	public void atualizar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		Usuario usu = new Usuario(bean.getId(), bean.getNome(),
+	public void atualizar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		Usuario usu = new Usuario(bean.getIdFornecedor(), bean.getNome(),
         		bean.getLogin(), bean.getSenha(),
-        		bean.getCpf(), bean.getSetor());
+        		bean.getPrivilegio(), bean.getSetor());
 		
 		UsuarioDAO dao = new UsuarioDAO();
 		
-		dao.update(bean.getId(), bean.getNome(),
+		dao.update(bean.getIdFornecedor(), bean.getNome(),
         		bean.getLogin(), bean.getSenha(),
-        		bean.getCpf(), bean.getSetor());
+        		bean.getPrivilegio(), bean.getSetor());
 	}
 	public void deletar(UsuarioBean bean) throws DAOException, ParametroInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
-		dao.delete(bean.getId());
+		dao.delete(bean.getLogin());
 	}
-	public Usuario encontrar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public Usuario encontrar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
-		UsuarioBean usuBean = dao.encontrar(bean.getId());
-		Usuario usu = new Usuario(usuBean.getId(), usuBean.getNome(),
+		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
+		Usuario usu = new Usuario(usuBean.getIdFornecedor(), usuBean.getNome(),
 				usuBean.getLogin(), usuBean.getSenha(),
-				usuBean.getCpf(), usuBean.getSetor());
+				usuBean.getPrivilegio(), usuBean.getSetor());
 		return usu;
 	}
-	public Usuario encontrar(int idUsuario) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public boolean entrar(UsuarioBean bean) throws DAOException {
+		UsuarioDAO dao = new UsuarioDAO();
+		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
+		if(bean.getSenha().equals(usuBean.getSenha())) {
+			return true;
+		}
+		return false;
+	}
+	/*public Usuario encontrar(int idUsuario) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(idUsuario);
-		Usuario usu = new Usuario(usuBean.getId(), usuBean.getNome(),
+		Usuario usu = new Usuario(usuBean.getIdFornecedor(), usuBean.getNome(),
 				usuBean.getLogin(), usuBean.getSenha(),
 				usuBean.getCpf(), usuBean.getSetor());
 		return usu;
-	}
-	public ArrayList<Usuario> mostrarTodas() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	}*/
+	public ArrayList<UsuarioBean> mostrarTodas() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		ArrayList<UsuarioBean> usersBean = dao.mostrarTodos();
-		ArrayList<Usuario> usuarios = null;
-		for(UsuarioBean userB:usersBean) {
-			usuarios.add(encontrar(userB));
+		return usersBean;
+	}
+	public int getIdFornecedor() {
+		return idFornecedor;
+	}
+	public void setIdFornecedor(int idFornecedor) {
+		this.idFornecedor = idFornecedor;
+	}
+	public int getPrivilegio() {
+		return privilegio;
+	}
+	public void setPrivilegio(int privilegio) throws ParametroInvalidoException{
+		if( privilegio >=1 && privilegio < 4) {
+			this.privilegio = privilegio;
+		}else {
+			throw new ParametroInvalidoException("Privilegio invalido");
 		}
-		return usuarios;
 	}
 }

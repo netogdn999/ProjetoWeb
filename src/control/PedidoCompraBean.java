@@ -5,16 +5,17 @@ import java.sql.Date;
 public class PedidoCompraBean {
 	private int id;
 	private Date dataInicio, dataFim;
-	private int idUsuario;
+	private String loginUsuario;
 	private boolean isInterno;
 	
-	public PedidoCompraBean(int id, Date dataInicio, Date dataFim, int idUsuario,
+	public PedidoCompraBean() { }
+	public PedidoCompraBean(int id, Date dataInicio, Date dataFim, String loginUsuario,
 			boolean isInterno) {
 		super();
 		this.id = id;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
-		this.idUsuario = idUsuario;
+		this.loginUsuario = loginUsuario;
 		this.isInterno = isInterno;
 	}
 
@@ -49,12 +50,10 @@ public class PedidoCompraBean {
 	public void setInterno(boolean isInterno) {
 		this.isInterno = isInterno;
 	}
-
-	public int getIdUsuario() {
-		return idUsuario;
+	public String getLoginUsuario() {
+		return loginUsuario;
 	}
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setLoginUsuario(String loginUsuario) {
+		this.loginUsuario = loginUsuario;
 	}
 }

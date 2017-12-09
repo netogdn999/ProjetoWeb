@@ -1,23 +1,21 @@
 package control;
 
 public class UsuarioBean {
-	private int id;
-	private String nome, login, senha, cpf, setor;
+	private int idFornecedor;
+	private String nome, login, senha, setor;
+	private int privilegio; // 1 - administrador, 2 - funcionario, 3 - fornecedor
 	
-	public UsuarioBean(int id, String nome, String login, String senha, String cpf, String setor) {
+	public UsuarioBean() {
+		
+	}
+	public UsuarioBean(int idFornecedor,String nome, String login, String senha, int privilegio, String setor) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
-		this.cpf = cpf;
+		this.idFornecedor = idFornecedor;
+		this.privilegio = privilegio;
 		this.setor = setor;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -37,17 +35,23 @@ public class UsuarioBean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 	public String getSetor() {
 		return setor;
 	}
 	public void setSetor(String setor) {
 		this.setor = setor;
+	}
+	public int getIdFornecedor() {
+		return idFornecedor;
+	}
+	public void setIdFornecedor(int idFornecedor) {
+		this.idFornecedor = idFornecedor;
+	}
+	public int getPrivilegio() {
+		return privilegio;
+	}
+	public void setPrivilegio(int privilegio) {
+		this.privilegio = privilegio;
 	}
 	
 }

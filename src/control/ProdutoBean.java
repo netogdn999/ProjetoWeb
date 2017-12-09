@@ -5,6 +5,7 @@ public class ProdutoBean {
 	private String nome, marca;
 	private int idCategoria;
 	
+	public ProdutoBean() { }
 	public ProdutoBean(int id, String nome, String marca, int idCategoria) {
 		super();
 		this.id = id;

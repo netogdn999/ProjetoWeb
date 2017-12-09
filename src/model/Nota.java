@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 
 import model.CnpjInvalidoException;
-import model.CpfInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
 import control.FornecedorBean;
@@ -14,7 +13,7 @@ import model.ParametroInvalidoException;
 public class Nota {
 	private int id;
 	private int nota;
-	private String descricao;
+	private String descricao, nome;
 	
 	public Nota(){
 	}
@@ -25,6 +24,10 @@ public class Nota {
 	public Nota(int id, int nota, String descricao) throws ParametroInvalidoException {
 		this(nota, descricao);
 		setId(id);
+	}
+	public Nota(int id, int nota, String descricao, String nome) throws ParametroInvalidoException {
+		this(id, nota, descricao);
+		setNome(nome);
 	}
 	public int getNota() {
 		return nota;
@@ -49,48 +52,45 @@ public class Nota {
 		this.id = id;
 	}
 	
-	public void inserir(NotaBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void inserir(NotaBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		Nota nota = new Nota(bean.getId(), bean.getNota(),bean.getDescricao());
 		NotaDAO dao = new NotaDAO();
-		dao.inserir(bean.getNota(), bean.getDescricao(),bean.getIdUsuario(), bean.getIdFornecedor());
+		dao.inserir(bean.getNota(), bean.getDescricao(),bean.getLoginUsuario(), bean.getIdFornecedor());
 	}
 	
-	public void atualizar(NotaBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public void atualizar(NotaBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		Nota nota = new Nota(bean.getId(), bean.getNota(),bean.getDescricao());
 		NotaDAO dao = new NotaDAO();
-		dao.update(bean.getId(), bean.getNota(), bean.getDescricao(),bean.getIdUsuario());
+		dao.update(bean.getId(), bean.getNota(), bean.getDescricao(),bean.getLoginUsuario());
 	}
 	
 	public void deletar(NotaBean bean) throws DAOException, ParametroInvalidoException {
 		NotaDAO dao = new NotaDAO();
-		dao.delete(bean.getId(), bean.getIdUsuario());
+		dao.delete(bean.getId(), bean.getLoginUsuario());
 	}
 	
-	public Nota encontrar(NotaBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public NotaBean encontrar(NotaBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		NotaDAO dao = new NotaDAO();
-		NotaBean prodBean = dao.encontrar(bean.getId(), bean.getIdUsuario());
-		Categoria cat = new Categoria();
-		Nota nota = new Nota(prodBean.getId(), prodBean.getNota(),prodBean.getDescricao());
-		return nota;
+		NotaBean prodBean = dao.encontrar(bean.getId(), bean.getLoginUsuario());
+		return prodBean;
 	}
 	
-	public ArrayList<Nota> mostrarTodas() throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ArrayList<NotaBean> mostrarTodas() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		NotaDAO dao = new NotaDAO();
 		ArrayList<NotaBean> notasBean = dao.mostrarTodas();
-		ArrayList<Nota> notas = null;
-		for(NotaBean notaB:notasBean) {
-			notas.add(encontrar(notaB));
-		}
-		return notas;
+	
+		return notasBean;
 	}
 	
-	public ArrayList<Nota> mostrarNotasFornecedor(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public ArrayList<NotaBean> mostrarNotasFornecedor(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		NotaDAO dao = new NotaDAO();
 		ArrayList<NotaBean> notasBean = dao.mostrarNotasFornecedor(bean.getId());
-		ArrayList<Nota> notas = null;
-		for(NotaBean notaB:notasBean) {
-			notas.add(encontrar(notaB));
-		}
-		return notas;
+		return notasBean;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}	
 }

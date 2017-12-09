@@ -5,7 +5,8 @@ public class ItemBean {
 	private int idPedidoCompra, idProduto;
 	private int qtd;
 	
-	public ItemBean(int id, int idFornecedor, int idProduto, int qtd) {
+	public ItemBean() { }
+	public ItemBean(int id, int idPedidoCompra, int idProduto, int qtd) {
 		this.id = id;
 		this.qtd = qtd;
 		this.idPedidoCompra=idPedidoCompra;

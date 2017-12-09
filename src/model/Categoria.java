@@ -55,37 +55,27 @@ public class Categoria {
 		CategoriaDAO dao = new CategoriaDAO();
 		dao.delete(bean.getId());
 	}
-	public Categoria encontrar(CategoriaBean bean) throws DAOException, ParametroInvalidoException {
+	public CategoriaBean encontrar(CategoriaBean bean) throws DAOException, ParametroInvalidoException {
 		CategoriaDAO dao = new CategoriaDAO();
 		CategoriaBean catBean = dao.encontrar(bean.getId());
-		Categoria cat = new Categoria(catBean.getId(), catBean.getNome());
-		return cat;
+		return catBean;
 	}
-	public ArrayList<Categoria> mostrarTodas() throws DAOException, ParametroInvalidoException {
+	public ArrayList<CategoriaBean> mostrarTodas() throws DAOException, ParametroInvalidoException {
 		CategoriaDAO dao = new CategoriaDAO();
 		ArrayList<CategoriaBean> catsBean = dao.mostrarTodas();
-		ArrayList<Categoria> categorias = null;
-		for(CategoriaBean catB:catsBean) {
-			categorias.add(new Categoria(catB.getId(), catB.getNome()));
-		}
-		return categorias;
+		return catsBean;
 	}
-	public Categoria[] mostrarCategoriasFornecedor(FornecedorBean bean) throws DAOException, ParametroInvalidoException {
+	public ArrayList<CategoriaBean> mostrarCategoriasFornecedor(FornecedorBean bean) throws DAOException, ParametroInvalidoException {
 		CategoriaDAO dao = new CategoriaDAO();
 		ArrayList<CategoriaBean> catsBean = dao.mostrarCategoriasFornecedor(bean.getId());
-		Categoria[] categorias = new Categoria[catsBean.size()];
-		int i=0;
-		for(CategoriaBean catB:catsBean) {
-			categorias[i] = (new Categoria(catB.getId(), catB.getNome()));
-			i++;
-		}
-		return categorias;
+	
+		return catsBean;
 	}
-	public Categoria mostrarCategoriaProduto(ProdutoBean bean) throws DAOException, ParametroInvalidoException {
+	public CategoriaBean mostrarCategoriaProduto(ProdutoBean bean) throws DAOException, ParametroInvalidoException {
 		CategoriaDAO dao = new CategoriaDAO();
 		CategoriaBean cat = dao.mostrarCategoriaProduto(bean.getId());
-		Categoria categoria = new Categoria(cat.getId(), cat.getNome());
-		return categoria;
+
+		return cat;
 	}
 	public void inserirFornecedorCategoria(FornecedorBean bean) {
 		CategoriaDAO dao = new CategoriaDAO();

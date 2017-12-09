@@ -8,8 +8,8 @@ import control.ItemBean;
 public class ItemDAO {
 	
 	private ItemBean map(ResultSet rs) throws SQLException {
-        ItemBean resultado = new ItemBean(rs.getInt("id"), rs.getInt("id_produto"),
-        		rs.getInt("id_fornecedor"), rs.getInt("quantidade"));
+        ItemBean resultado = new ItemBean(rs.getInt("id"), rs.getInt("id_pedido_compra"),
+        		rs.getInt("id_produto"), rs.getInt("quantidade"));
         return resultado;
     }
 	
