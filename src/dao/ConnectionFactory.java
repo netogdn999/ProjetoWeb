@@ -5,27 +5,30 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	private static Connection con = null;
-	private static String caminho = "jdbc:postgresql://localhost:5432/";
-	private static String usuario = "postgres";
-	private static String senha = "toor";
-	//postgres jdbc connection
+	private Connection con = null;
+	private String caminho = "jdbc:mysql://localhost:3306/";
+	private String usuario = "root";
+	private String senha = "toor";
 	
-	public static Connection conectar(String banco) throws SQLException{
+	public ConnectionFactory() {
+		super();
+	}
+	
+	public Connection conectar(String banco) throws SQLException{
 		try {
-			Class.forName("org.postgresql.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			try {
-				con = DriverManager.getConnection(caminho+banco, usuario, senha);
-			}catch(SQLException e) {
-				throw new SQLException("Caminho, senha ou usuario incorretos");
+				con = DriverManager.getConnection(caminho + banco, usuario, senha);
+			} catch (SQLException e) {
+				System.out.println("Caminho, senha ou usuário incorretos");
 			}
-		}catch(ClassNotFoundException e) {
-			throw new ClassCastException("Driver nao encontrado");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Driver não encontrado");
 		}
 		return con;
 	}
 	
-	public static Connection getConnection() {
+	public Connection getConnection() {
 		return con;
 	}
 }

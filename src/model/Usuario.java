@@ -103,13 +103,12 @@ public class Usuario {
 				usuBean.getPrivilegio(), usuBean.getSetor());
 		return usu;
 	}
-	public boolean entrar(UsuarioBean bean) throws DAOException {
+	public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
-		if(bean.getSenha().equals(usuBean.getSenha())) {
-			return true;
+		if(usuBean==null || !(bean.getSenha().equals(usuBean.getSenha()))) {
+			throw new LoginInvalidoException("usuário inválido");
 		}
-		return false;
 	}
 	/*public Usuario encontrar(int idUsuario) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();

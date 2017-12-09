@@ -99,11 +99,11 @@ public class UsuarioDAO {
     }
 
 	public UsuarioBean encontrar(String login) throws DAOException{
-        Connection con = null;
+		Connection con=null;
         UsuarioBean usuario = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+        	con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from usuario where login = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, login);
