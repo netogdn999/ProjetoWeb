@@ -138,6 +138,32 @@ public class UsuarioDAO {
         return usuario;
     }
 	
+public UsuarioBean encontrar(int idFornecedor) throws DAOException{
+		Connection con=null;
+        UsuarioBean usuario = null;
+                
+        try {
+        	con = new ConnectionFactory().conectar("leilao");
+            String sql = "select * from usuario where id_fornecedor = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, idFornecedor);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+            	usuario = map(rs);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Operação não realizada com sucesso.", e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                throw new DAOException("Não foi possível fechar a conexão.", e);
+            }
+        }
+        return usuario;
+    }
 	public ArrayList<UsuarioBean> mostrarTodos() throws DAOException {
         Connection con = null;
         ArrayList<UsuarioBean> usuarios = new ArrayList<>();

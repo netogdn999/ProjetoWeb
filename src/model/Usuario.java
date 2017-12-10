@@ -101,7 +101,14 @@ public class Usuario {
 		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
 		return usuBean;
 	}
-	public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	
+public UsuarioBean encontrar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		UsuarioDAO dao = new UsuarioDAO();
+		UsuarioBean usuBean = dao.encontrar(bean.getId());
+		return usuBean;
+	}
+
+public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
 		if(usuBean.getPrivilegio()==3) {
