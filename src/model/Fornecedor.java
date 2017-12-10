@@ -261,6 +261,13 @@ public class Fornecedor {
 		
 		return fornBean;
 	}
+public FornecedorBean ultimoFornecedorCadastrado() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
+FornecedorDAO dao = new FornecedorDAO();
+int id = dao.idUltimoCadastrado();
+FornecedorBean fornBean = new FornecedorBean();
+fornBean.setId(id);
+return encontrar(fornBean);
+}
 	public boolean isAutenticado() {
 		return isAutenticado;
 	}

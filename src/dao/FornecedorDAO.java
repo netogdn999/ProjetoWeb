@@ -161,7 +161,31 @@ public class FornecedorDAO {
         }
         return fornecedores;
     }
-	
+	public int idUltimoCadastrado() throws DAOException{
+       Connection con = null;
+       int id;
+               
+       try {
+           con = ConnectionFactory.getConnection();
+           String sql = "select max(id) from fornecedor";
+           PreparedStatement pst = con.prepareStatement(sql);
+           ResultSet rs = pst.executeQuery();
+           if (rs.next()) {
+               id = rs.getInt("id");
+           }
+       } catch (SQLException e) {
+           throw new DAOException("Operação não realizada com sucesso.", e);
+       } finally {
+           try {
+               if (con != null) {
+                   con.close();
+               }
+           } catch (SQLException e) {
+               throw new DAOException("Não foi possível fechar a conexão.", e);
+           }
+       }
+       return id;
+   }
 	public ArrayList<FornecedorBean> mostrarFornecedoresCategoria(int idCategoria) throws DAOException {
         Connection con = null;
         ArrayList<FornecedorBean> fornecedores = new ArrayList<>();
