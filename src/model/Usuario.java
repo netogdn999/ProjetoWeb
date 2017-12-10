@@ -5,6 +5,7 @@ import model.CnpjInvalidoException;
 import dao.DAOException;
 import model.EmailInvalidoException;
 import model.ParametroInvalidoException;
+import control.FornecedorBean;
 import control.UsuarioBean;
 import dao.UsuarioDAO;
 
@@ -95,19 +96,25 @@ public class Usuario {
 		UsuarioDAO dao = new UsuarioDAO();
 		dao.delete(bean.getLogin());
 	}
-	public Usuario encontrar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public UsuarioBean encontrar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
-		Usuario usu = new Usuario(usuBean.getIdFornecedor(), usuBean.getNome(),
-				usuBean.getLogin(), usuBean.getSenha(),
-				usuBean.getPrivilegio(), usuBean.getSetor());
-		return usu;
+		return usuBean;
 	}
-	public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException {
+	public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
+		if(usuBean.getPrivilegio()==3) {
+			Fornecedor fornecedor=new Fornecedor();
+			FornecedorBean fornecedorB=new FornecedorBean();
+			fornecedorB.setId(usuBean.getIdFornecedor());
+			fornecedorB=fornecedor.encontrar(fornecedorB);
+			if(!fornecedorB.isAutenticado()) {
+				throw new LoginInvalidoException("Usuario não autenticado");
+			}
+		}
 		if(usuBean==null || !(bean.getSenha().equals(usuBean.getSenha()))) {
-			throw new LoginInvalidoException("usuário inválido");
+			throw new LoginInvalidoException("login ou senha inválido");
 		}
 	}
 	/*public Usuario encontrar(int idUsuario) throws DAOException, ParametroInvalidoException, CpfInvalidoException, CnpjInvalidoException, EmailInvalidoException {

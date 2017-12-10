@@ -2,8 +2,7 @@ package control;
 
 public class FornecedorBean {
 	private int id;
-	private String nomeFantasia, razaoSocial, cnpj, email, endereco, cep, 
-					telefone1, telefone2;
+	private String nomeFantasia, razaoSocial, cnpj, email, endereco, cep, telefone1, telefone2;
 	private int[] categorias;
 	private boolean isAutenticado;
 	

@@ -17,7 +17,7 @@ public class CategoriaDAO {
 	public void inserir(String nome) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into categoria (nome) values (?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -40,7 +40,7 @@ public class CategoriaDAO {
 	public void inserirFornecedorCategoria(int idCategoria, int idFornecedor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into fornecedor_categoria (id_categoria, id_fornecedor) values (?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -64,7 +64,7 @@ public class CategoriaDAO {
 	public void update(int id, String nome) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update categoria set nome = ? where id = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -89,7 +89,7 @@ public class CategoriaDAO {
     public void deleteFornecedorCategoria(int idCategoria, int idFornecedor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from fornecedor_categoria where id_categoria = ? and id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idCategoria);
@@ -112,7 +112,7 @@ public class CategoriaDAO {
     public void delete(int id) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from categoria where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -137,7 +137,7 @@ public class CategoriaDAO {
         CategoriaBean cat = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from categoria where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -163,7 +163,7 @@ public class CategoriaDAO {
         Connection con = null;
         ArrayList<CategoriaBean> categorias = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from categoria";
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -189,7 +189,7 @@ public class CategoriaDAO {
         Connection con = null;
         ArrayList<CategoriaBean> categorias = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from categoria where id = (select id_categoria from fornecedor_categoria where id_fornecedor = ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idFornecedor);
@@ -216,7 +216,7 @@ public class CategoriaDAO {
         CategoriaBean cat = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from categoria where id = (select id_categoria from produto where id = ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idProduto);

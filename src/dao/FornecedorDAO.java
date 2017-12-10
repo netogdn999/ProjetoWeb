@@ -17,12 +17,10 @@ public class FornecedorDAO {
         return resultado;
     }
 	
-	public void inserir(String nomeFantasia,String razaoSocial, 
-			String cnpj, String email, String endereco, String cep,
-			String telefone1, String telefone2, boolean isAutenticado) throws DAOException{
+	public void inserir(String nomeFantasia,String razaoSocial, String cnpj, String email, String endereco, String cep,String telefone1, String telefone2, boolean isAutenticado) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into fornecedor (nome_fantasia, razao_social, cnpj, email, endereco, cep, telefone1, telefone2, is_autenticado) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -36,10 +34,11 @@ public class FornecedorDAO {
             pst.setString(7, telefone1);
             pst.setString(8, telefone2);
             pst.setBoolean(9, isAutenticado);
-            //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("OperaÃ§Ã£o nÃ£o realizada com sucesso.", e);
+        	e.printStackTrace();
+        	System.out.println(e.getMessage());
+            throw new DAOException("Operação não realizada com sucesso.");
         } finally {
             try {
                 if (con != null) {
@@ -56,7 +55,7 @@ public class FornecedorDAO {
 			String telefone1, String telefone2, boolean isAutenticado) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update fornecedor set nome_fantasia = ?, razao_social = ?, cnpj = ?, email = ?, endereco = ?, cep = ?, telefone1 = ?, telefone2 = ?, is_autenticado  = ? where id = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -89,7 +88,7 @@ public class FornecedorDAO {
     public void delete(int id) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from fornecedor where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -114,7 +113,7 @@ public class FornecedorDAO {
         FornecedorBean forn = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from fornecedor where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -140,7 +139,7 @@ public class FornecedorDAO {
         Connection con = null;
         ArrayList<FornecedorBean> fornecedores = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from fornecedor";
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -161,36 +160,38 @@ public class FornecedorDAO {
         }
         return fornecedores;
     }
+	
 	public int idUltimoCadastrado() throws DAOException{
-       Connection con = null;
-       int id;
-               
-       try {
-           con = ConnectionFactory.getConnection();
-           String sql = "select max(id) from fornecedor";
-           PreparedStatement pst = con.prepareStatement(sql);
-           ResultSet rs = pst.executeQuery();
-           if (rs.next()) {
-               id = rs.getInt("id");
-           }
-       } catch (SQLException e) {
-           throw new DAOException("Operação não realizada com sucesso.", e);
-       } finally {
-           try {
-               if (con != null) {
-                   con.close();
-               }
-           } catch (SQLException e) {
-               throw new DAOException("Não foi possível fechar a conexão.", e);
-           }
-       }
-       return id;
-   }
+	       Connection con = null;
+	       int id=-1;
+	               
+	       try {
+	    	   con = new ConnectionFactory().conectar("leilao");
+	           String sql = "select max(id) from fornecedor";
+	           PreparedStatement pst = con.prepareStatement(sql);
+	           ResultSet rs = pst.executeQuery();
+	           if (rs.next()) {
+	               id = rs.getInt("max(id)");
+	           }
+	       } catch (SQLException e) {
+	           throw new DAOException("Operação não realizada com sucesso.", e);
+	       } finally {
+	           try {
+	               if (con != null) {
+	                   con.close();
+	               }
+	           } catch (SQLException e) {
+	               throw new DAOException("Não foi possível fechar a conexão.", e);
+	           }
+	       }
+	       return id;
+	   }
+	
 	public ArrayList<FornecedorBean> mostrarFornecedoresCategoria(int idCategoria) throws DAOException {
         Connection con = null;
         ArrayList<FornecedorBean> fornecedores = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from fornecedor where id = (select id_fornecedor from fornecedor_categoria where id_categoria = ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idCategoria);

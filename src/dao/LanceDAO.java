@@ -24,7 +24,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
 			Date dataLance, boolean isForaDoPadrao) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into proposta (id_pedido_compra, id_fornecedor, total, quantidade_parcelas, prazo_entrega, data, is_fora_padrao) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -54,7 +54,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
 	public void inserirLance(int idItem,int idPedidoCompra, int idFornecedor, float valor) throws DAOException{
         Connection con = null;
         try {
-        	con = ConnectionFactory.getConnection();
+        	con = new ConnectionFactory().conectar("leilao");
         	String insert_sql = "insert into lance (id_item, id_pedido_compra, id_fornecedor, valor) values (?, ?, ?, ?)";
         	PreparedStatement pst;
         	pst = con.prepareStatement(insert_sql);
@@ -82,7 +82,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
 			Date dataLance, boolean isForaDoPadrao) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update proposta set id_pedido_compra = ?, id_fornecedor = ?, total = ?, quantidade_parcelas = ?, prazo_entrega = ?, data = ?, is_fora_padrao = ? where id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -112,7 +112,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
 	public void updateLance(int idItem,int idPedidoCompra, int idFornecedor, float valor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update lance set valor = ? where id_item = ? and id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -139,7 +139,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
     public void deleteProposta(int idPedidoCompra, int idFornecedor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from proposta where id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idPedidoCompra);
@@ -163,7 +163,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
     public void deleteLance(int idItem,int idPedidoCompra, int idFornecedor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from lance where id_item = ? and id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idItem);
@@ -190,7 +190,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         LanceBean lance = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from proposta where id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idPedidoCompra);
@@ -218,7 +218,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         float lance = 0;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from lance where id_item = ? and id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idItem);
@@ -246,7 +246,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         Connection con = null;
         ArrayList<LanceBean> propostas = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from proposta";
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -272,7 +272,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         Connection con = null;
         ArrayList<Float> lances = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from lance where id_pedido_compra = ? and id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idPedidoCompra);
@@ -298,7 +298,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         Connection con = null;
         ArrayList<LanceBean> lances = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from lance, proposta where id_pedido_compra = ? and lance.id_fornecedor = proposta.id_fornecedor";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idPedidoCompra);
@@ -324,7 +324,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         Connection con = null;
         ArrayList<LanceBean> propostas = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from proposta where id_pedido_compra = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idPedidoCompra);
@@ -350,7 +350,7 @@ public class LanceDAO { //int id, int idFornecedor, float total, int qtdParcelas
         Connection con = null;
         ArrayList<LanceBean> propostas = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from proposta where id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idFornecedor);

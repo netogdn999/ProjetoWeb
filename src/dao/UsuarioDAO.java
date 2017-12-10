@@ -20,21 +20,34 @@ public class UsuarioDAO {
 	public void inserir(int idFornecedor, String nome, String login, String senha, int privilegio, String setor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
-            String insert_sql = "insert into usuario (nome, login, senha, privilegio, setor, id_fornecedor) values (?, ?, ?, ?, ?, ?)";
+            con = new ConnectionFactory().conectar("leilao");
             PreparedStatement pst;
-            pst = con.prepareStatement(insert_sql);
-            //Passando os paramentros para o SQL
-            pst.setString(1, nome);
-            pst.setString(2, login);
-            pst.setString(3, senha);
-            pst.setInt(4, privilegio);
-            pst.setString(5, setor);
-            pst.setInt(6, idFornecedor);
-            //Executando os comandos
+            if(idFornecedor==0) {
+            	String insert_sql = "insert into usuario (nome, login, senha, privilegio, setor) values (?, ?, ?, ?, ?)";
+            	pst = con.prepareStatement(insert_sql);
+            	//Passando os paramentros para o SQL
+            	pst.setString(1, nome);
+            	pst.setString(2, login);
+            	pst.setString(3, senha);
+            	pst.setInt(4, privilegio);
+            	pst.setString(5, setor);
+            	//Executando os comandos
+            }else {
+            	String insert_sql = "insert into usuario (nome, login, senha, privilegio, setor, id_fornecedor) values (?, ?, ?, ?, ?, ?)";
+            	pst = con.prepareStatement(insert_sql);
+            	//Passando os paramentros para o SQL
+            	pst.setString(1, nome);
+            	pst.setString(2, login);
+            	pst.setString(3, senha);
+            	pst.setInt(4, privilegio);
+            	pst.setString(5, setor);
+            	pst.setInt(6, idFornecedor);
+            	//Executando os comandos
+            }
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Opera√ß√£o n√£o realizada com sucesso.", e);
+        	System.out.println(e.getMessage());
+            throw new DAOException("OperaÁ„o n„o realizada com sucesso.", e);
         } finally {
             try {
                 if (con != null) {
@@ -49,7 +62,7 @@ public class UsuarioDAO {
 	public void update(int idFornecedor, String nome, String login, String senha, int privilegio, String setor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update usuario set nome = ?, id_fornecedor = ?, senha = ?, privilegio = ?, setor = ? where login = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -78,7 +91,7 @@ public class UsuarioDAO {
     public void delete(String login) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from usuario where login = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, login);
@@ -129,7 +142,7 @@ public class UsuarioDAO {
         Connection con = null;
         ArrayList<UsuarioBean> usuarios = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from usuario";
             PreparedStatement pst = con.prepareStatement(sql);
             

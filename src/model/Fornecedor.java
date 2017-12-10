@@ -204,20 +204,13 @@ public class Fornecedor {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public void inserir(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		Fornecedor forn = new Fornecedor(bean.getId(),bean.getNomeFantasia(),
-				bean.getRazaoSocial(), bean.getCnpj(),
-				bean.getEmail(), bean.getEndereco(), bean.getCep(),
-				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
-		
+		Fornecedor forn = new Fornecedor(bean.getId(),bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),bean.getEmail(), bean.getEndereco(), bean.getCep(),bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
 		FornecedorDAO dao = new FornecedorDAO();
-		dao.inserir(bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
-				bean.getEmail(), bean.getEndereco(), bean.getCep(),
-				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
-		
-		Categoria cat = new Categoria();
-		cat.inserirFornecedorCategoria(bean);
+		dao.inserir(bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),bean.getEmail(), bean.getEndereco(), bean.getCep(),bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
 	}
+	
 	public void atualizar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		Fornecedor forn = new Fornecedor(bean.getId(),bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
 				bean.getEmail(), bean.getEndereco(), bean.getCep(),
@@ -235,7 +228,7 @@ public class Fornecedor {
 		FornecedorDAO dao = new FornecedorDAO();
 		dao.delete(bean.getId());	
 	}
-	public FornecedorBean encontrar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public FornecedorBean encontrar(FornecedorBean bean) throws DAOException, CnpjInvalidoException, EmailInvalidoException {
 		FornecedorDAO dao = new FornecedorDAO();
 		FornecedorBean fornBean = dao.encontrar(bean.getId());
 		
@@ -261,13 +254,18 @@ public class Fornecedor {
 		
 		return fornBean;
 	}
-public FornecedorBean ultimoFornecedorCadastrado() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
-FornecedorDAO dao = new FornecedorDAO();
-int id = dao.idUltimoCadastrado();
-FornecedorBean fornBean = new FornecedorBean();
-fornBean.setId(id);
-return encontrar(fornBean);
-}
+	
+	public FornecedorBean ultimoFornecedorCadastrado() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
+		FornecedorDAO dao = new FornecedorDAO();
+		int id = dao.idUltimoCadastrado();
+		if(id==-1) {
+			throw new ParametroInvalidoException("Nenhum fornecedor cadastrado");
+		}
+		FornecedorBean fornBean = new FornecedorBean();
+		fornBean.setId(id);
+		return encontrar(fornBean);
+	}
+	
 	public boolean isAutenticado() {
 		return isAutenticado;
 	}

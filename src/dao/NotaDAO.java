@@ -20,7 +20,7 @@ public class NotaDAO {
 	public void inserir(int nota, String descricao, String idUsuario, int idFornecedor) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into nota (nota, descricao, id_usuario, id_fornecedor) values (?, ?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -47,7 +47,7 @@ public class NotaDAO {
 	public void update(int id, int nota, String descricao, String idUsuario) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update nota set nota = ?, descricao = ? where id = ? and id_usuario = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -74,7 +74,7 @@ public class NotaDAO {
     public void delete(int id, String idUsuario) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from nota where id = ? and id_usuario = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -100,7 +100,7 @@ public class NotaDAO {
         NotaBean nota = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from nota where id = ? and id_usuario = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -127,7 +127,7 @@ public class NotaDAO {
         Connection con = null;
         ArrayList<NotaBean> notas = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from nota";
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -152,7 +152,7 @@ public class NotaDAO {
         Connection con = null;
         ArrayList<NotaBean> notas = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from nota where id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idFornecedor);

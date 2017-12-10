@@ -19,7 +19,7 @@ public class ProdutoDAO {
 	public void inserir(String nome, String marca, int idCategoria) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into produto (nome, marca, id_categoria) values (?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -45,7 +45,7 @@ public class ProdutoDAO {
 	public void update(int id, String nome, String marca, int idCategoria) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update produto set nome = ?, marca = ?, id_categoria = ? where id = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -72,7 +72,7 @@ public class ProdutoDAO {
     public void delete(int id) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from produto where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -97,7 +97,7 @@ public class ProdutoDAO {
         ProdutoBean prod = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from produto where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -123,7 +123,7 @@ public class ProdutoDAO {
         Connection con = null;
         ArrayList<ProdutoBean> produtos = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from produto";
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -148,7 +148,7 @@ public class ProdutoDAO {
         Connection con = null;
         ArrayList<ProdutoBean> produtos = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from produto where id_categoria = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idCategoria);

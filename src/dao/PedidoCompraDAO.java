@@ -22,7 +22,7 @@ public class PedidoCompraDAO {
 			boolean isInterno) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "insert into pedido_compra (data_inicio, data_fim, id_usuario, is_interno) values (?, ?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -50,7 +50,7 @@ public class PedidoCompraDAO {
 			boolean isInterno) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String insert_sql = "update pedido_compra set data_inicio = ?, data_fim = ?, id_usuario = ?, is_interno = ? where id = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
@@ -78,7 +78,7 @@ public class PedidoCompraDAO {
     public void delete(int id) throws DAOException{
         Connection con = null;
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "delete from pedido_compra where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -103,7 +103,7 @@ public class PedidoCompraDAO {
         PedidoCompraBean ped = null;
                 
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from pedido_compra where id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -129,7 +129,7 @@ public class PedidoCompraDAO {
         Connection con = null;
         ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from pedido_compra";
             PreparedStatement pst = con.prepareStatement(sql);
             
@@ -154,7 +154,7 @@ public class PedidoCompraDAO {
         Connection con = null;
         ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from pedido_compra where id_usuario = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, idUsuario);
@@ -179,7 +179,7 @@ public class PedidoCompraDAO {
         Connection con = null;
         ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
         try {
-            con = ConnectionFactory.getConnection();
+            con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from pedido_compra, item, produto where item.id_pedido_compra = pedido_compra.id and item.id_produto = produto.id and produto.id_categoria = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idCategoria);
