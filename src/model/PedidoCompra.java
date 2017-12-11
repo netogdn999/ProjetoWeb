@@ -143,4 +143,15 @@ public class PedidoCompra {
 		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosUsuario(bean.getLogin());
 		return pedsBean;
 	}
+		public PedidoCompraBean ultimoPedidoCadastrado() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
+		PedidoCompraBean dao = new PedidoCompraBean();
+		int id = dao.idUltimoCadastrado();
+		if(id==-1) {
+			throw new ParametroInvalidoException("Nenhum pedido cadastrado");
+		}
+		PedidoCompraBean pedBean = new PedidoCompraBean();
+		pedBean.setId(id);
+		return encontrar(pedBean);
+	}
+
 }

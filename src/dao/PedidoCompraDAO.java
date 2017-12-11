@@ -175,6 +175,34 @@ public class PedidoCompraDAO {
         }
         return pedido_compraes;
     }
+
+	public int idUltimoCadastrado() throws DAOException{
+	       Connection con = null;
+	       int id=-1;
+	               
+	       try {
+	    	   con = new ConnectionFactory().conectar("leilao");
+	           String sql = "select max(id) from pedido_compra";
+	           PreparedStatement pst = con.prepareStatement(sql);
+	           ResultSet rs = pst.executeQuery();
+	           if (rs.next()) {
+	               id = rs.getInt("max(id)");
+	           }
+	       } catch (SQLException e) {
+	           throw new DAOException("Operação não realizada com sucesso.", e);
+	       } finally {
+	           try {
+	               if (con != null) {
+	                   con.close();
+	               }
+	           } catch (SQLException e) {
+	               throw new DAOException("Não foi possível fechar a conexão.", e);
+	           }
+	       }
+	       return id;
+	   }
+
+
 	public ArrayList<PedidoCompraBean> mostrarPedidosCategoria(int idCategoria) throws DAOException {
         Connection con = null;
         ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
