@@ -1,6 +1,5 @@
 $(document).ready(function() {
-	$("#botao").click(function(e){
-		e.preventDefault();
+	$("#botao a").click(function(){
 		$("#formulario").ajaxSubmit({
 			success: function(form) {
 				alert("entrou");

@@ -29,18 +29,41 @@ $(document).ready(function() {
 		$("#SM1botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'yellow'});
-//		e.preventDefault();
-//		var link=$("#SM1botao1 a").attr('href');
-//		$.ajax({
-//			type: 'GET',
-//			url: link,
-//			success: function(data){
-//				$("#visualizarTabela").html(data);
-//				$("#visualizar").show();
-//			},
-//			error: function(){
-//			}
-//		});
+		var link=$("#SM1botao1 a").attr('href');
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: link,
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
+	});
+	
+	$("#SM1botao2").click(function(e) {
+		$("#reset").click();
+		$("article").fadeOut(-100);
+		$(".button").fadeOut(-100);
+		$(".botao").css({'color':'white'});
+		$("#SM2botao3 a").css({'color':'white'});
+		$("#SM1botao1 a").css({'color':'white'});
+		$("#SM1botao2 a").css({'color':'white'});
+		$("#SM1botao2 a").css({'color':'yellow'});
+		var link=$("#SM1botao2 a").attr('href');
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: link,
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
 	});
 	
 //	$("#SM1botao2").click(function(e) {
@@ -69,7 +92,7 @@ $(document).ready(function() {
 //		});
 //	});
 	
-	$("#SM2botao1").click(function() {
+	$("#SM2botao1").click(function(e) {
 		$("#reset").click();
 		$("article").fadeOut(-100);
 		$(".button").fadeOut(-100);
@@ -77,7 +100,19 @@ $(document).ready(function() {
 		$("#SM2botao3 a").css({'color':'white'});
 		$("#SM2botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
-		$("#SM2botao1").css({'color':'yellow'});
+		$("#SM2botao1 a").css({'color':'yellow'});
+		var link=$("#SM2botao1 a").attr('href');
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: link,
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
 	});
 	
 	$("#SM2botao2").click(function(e) {
@@ -86,6 +121,7 @@ $(document).ready(function() {
 		$(".button").fadeOut(-100);
 		$(".botao").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
+		$("#SM2botao1 a").css({'color':'white'});
 		$("#SM2botao2 a").css({'color':'yellow'});
 		var link=$("#SM2botao2 a").attr('href');
 		e.preventDefault();
@@ -97,7 +133,6 @@ $(document).ready(function() {
 				$("#Formulario").fadeIn(250);
 				$("#CF1").fadeIn(250);
 				$("#CF2").fadeIn(250);
-				$("#CF3").fadeIn(250);
 			},
 			error: function(){
 			}
@@ -112,19 +147,20 @@ $(document).ready(function() {
 		$("#SM2botao3 a").css({'color':'white'});
 		$("#SM2botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
-		$("#SM4botao1").css({'color':'yellow'});
+		$("#SM4botao2 a").css({'color':'white'});
+		$("#SM4botao3 a").css({'color':'white'});
+		$("#SM4botao4 a").css({'color':'white'});
+		$("#SM4botao1 a").css({'color':'yellow'});
 		var link=$("#SM4botao1 a").attr('href');
 		e.preventDefault();
 		$.ajax({
 			type: 'GET',
-			url: link+"?op=1",
+			url: link,
 			success: function(data){
 				$("#Formulario").html(data);
 				$("#Formulario").fadeIn(250);
 				$("#CF1").fadeIn(250);
-				$("#CF2").fadeIn(250);
-				$("#CF3").fadeIn(250);
-				$("#CF4").fadeIn(250);
+				$("#CF5").fadeIn(250);
 			},
 			error: function(){
 			}
@@ -139,7 +175,62 @@ $(document).ready(function() {
 		$("#SM2botao3 a").css({'color':'white'});
 		$("#SM2botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
+		$("#SM4botao1 a").css({'color':'white'});
 		$("#SM4botao2").css({'color':'yellow'});
+		$("#SM4botao3 a").css({'color':'white'});
+		$("#SM4botao4 a").css({'color':'white'});
+	});
+	$("#SM4botao3").click(function(e) {
+		$("#reset").click();
+		$("article").fadeOut(-100);
+		$(".button").fadeOut(-100);
+		$(".botao").css({'color':'white'});
+		$("#SM2botao3 a").css({'color':'white'});
+		$("#SM2botao2 a").css({'color':'white'});
+		$("#SM1botao1 a").css({'color':'white'});
+		$("#SM4botao1 a").css({'color':'white'});
+		$("#SM4botao2").css({'color':'white'});
+		$("#SM4botao4 a").css({'color':'white'});
+		$("#SM4botao3 a").css({'color':'yellow'});
+		var link=$("#SM4botao3 a").attr('href');
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: link,
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+				$("#CF1").fadeIn(250);
+				$("#CF2").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
+	});
+	$("#SM4botao4").click(function(e) {
+		$("#reset").click();
+		$("article").fadeOut(-100);
+		$(".button").fadeOut(-100);
+		$(".botao").css({'color':'white'});
+		$("#SM2botao3 a").css({'color':'white'});
+		$("#SM2botao2 a").css({'color':'white'});
+		$("#SM1botao1 a").css({'color':'white'});
+		$("#SM4botao1 a").css({'color':'white'});
+		$("#SM4botao2").css({'color':'white'});
+		$("#SM4botao3 a").css({'color':'white'});
+		$("#SM4botao4 a").css({'color':'yellow'});
+		var link=$("#SM4botao4 a").attr('href');
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: link,
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
 	});
 	
 	$("#CF3").click(function(e) {
@@ -166,16 +257,37 @@ $(document).ready(function() {
 	});
 	
 	$("#CF2").click(function(e) {
-//		//if(this.checkValidity()){
-//			e.preventDefault();
-//			$("#cadastrar").ajaxSubmit({
-//				success: function(form) {
-//					$("#reset").click();
-//					$("#alerta").fadeOut(500);
-//					$("#alerta").fadeIn(500);
-//				}
-//			});
-//		//}
+		e.preventDefault();
+	});
+	
+	$("#CF5").click(function(e) {
+		e.preventDefault();
+		$(".Formulario").ajaxSubmit({
+			success: function(data) {
+				$("#Formulario").html(data);
+				$("#Formulario").show();
+				$(".button").fadeOut(-100);
+			},
+			error: function() {
+				alert("error");
+			}
+		});
+	});
+	
+	$("#CF6").click(function(e) {
+		e.preventDefault();
+		alert("aquiauqiauiq");
+		$(".Formulario").ajaxSubmit({
+			success: function(data) {
+				alert("entrou");
+				$("#Formulario").html(data);
+				$("#Formulario").show();
+				$(".button").fadeOut(-100);
+			},
+			error: function() {
+				alert("error");
+			}
+		});
 	});
 	
 	$("#CF4").click(function(e) {

@@ -33,29 +33,26 @@
 			</figure>
 			<nav class="menu">
 				<div class="menu1"><div class="menuHover" id="menu1" onclick="menu('#subMenu1','#subMenu2','#subMenu3','#subMenu4','#subMenu5')">Fornecedor</div></div>
-				<div class="menu2"><div class="menuHover" id="menu2" onclick="menu('#subMenu2','#subMenu1','#subMenu3','#subMenu4','#subMenu5')">Cliente</div></div>
+				<div class="menu2"><div class="menuHover" id="menu2" onclick="menu('#subMenu2','#subMenu1','#subMenu3','#subMenu4','#subMenu5')">Usuário</div></div>
 				<div class="menu3"><div class="menuHover" id="menu3" onclick="menu('#subMenu3','#subMenu1','#subMenu2','#subMenu4','#subMenu5')">Lances</div></div>
 				<div class="menu4"><div class="menuHover" id="menu4" onclick="menu('#subMenu4','#subMenu1','#subMenu2','#subMenu3','#subMenu5')">Pedido de Compras</div></div>
 				<div class="menu5"><div class="menuHover" id="menu5" onclick="sair()">Sair</div></div>
 			</nav>
 			<nav class="subMenu" id="subMenu1">
-				<div class="botao" id="SM1botao1"><p><a href="#">Visualizar fornecedores</a></p></div>
-				<div class="botao" id="SM1botao2"><p><a href="jsp/Fornecedor.jsp">Cadastrar fornecedor</a></p></div>
+				<div class="botao" id="SM1botao1"><p><a href="jsp/visualizarFornecedorAutenticados.jsp">Visualizar fornecedores autenticados</a></p></div>
+				<div class="botao" id="SM1botao2"><p><a href="jsp/visualizarFornecedorNAutenticados.jsp">Visualizar fornecedores não autenticados</a></p></div>
 			</nav>
 			<nav class="subMenu" id="subMenu2">
-				<div class="botao" id="SM2botao1"><p>Listar categorias</p></div>
-				<div class="botao" id="SM2botao2"><p>Suas categorias</p></div>
-				<div class="botao" id="SM2botao3"><p><a href="jsp/Cliente.jsp">Cadastrar usuário</a></p></div>
+				<div class="botao" id="SM2botao1"><p><a href="jsp/VisualizarUsuarios.jsp">Listar usuários</a></p></div>
+				<div class="botao" id="SM2botao2"><p><a href="jsp/Usuario.jsp">Cadastrar usuário</a></p></div>
 			</nav>
 			<nav class="subMenu" id="subMenu3">
-				<div class="botao" id="SM3botao1"><p>Seus lances</p></div>
-				<div class="botao" id="SM3botao2"><p>Lance de um item</p></div>
-				<div class="botao" id="SM3botao3"><p>Possiveis clientes</p></div>
 			</nav>
 			<nav class="subMenu" id="subMenu4">
-				<div class="botao" id="SM4botao1"><p>Adicionar pedido</p></div>
-				<div class="botao" id="SM4botao2"><p>Itens de um pedido</p></div>
-				<div class="botao" id="SM4botao3"><p>Remover Lance</p></div>
+				<div class="botao" id="SM4botao1"><p><a href="jsp/PedidoDeCompra.jsp">Adicionar pedido</a></p></div>
+				<div class="botao" id="SM4botao2"><p>Listar pedidos</p></div>
+				<div class="botao" id="SM4botao3"><p><a href="jsp/CadastrarCategoria.jsp">Cadastrar Categoria</a></p></div>
+				<div class="botao" id="SM4botao4"><p><a href="jsp/CadastrarProduto.jsp">Cadastrar produto</a></p></div>
 			</nav>
 		</header>
 		<section class="section">
@@ -67,8 +64,17 @@
 			<button type="submit" class="button" id="CF2" form="cadastrar">
 				Cadastrar
 			</button>
+			<button class="button" id="CF5" form="cadastrar">
+				Cadastrar
+			</button>
+			<button class="button" id="CF6" form="cadastrar">
+				Cadastrar
+			</button>
 			<button class="button" id="CF3">
 				<a href="#">Visualizar&nbsp;fornecedores</a>
+			</button>
+			<button class="button" id="CF4">
+				<a href="jsp/Item.jsp">Adicionar</a>
 			</button>
 		</section>
 		<footer class="footer">

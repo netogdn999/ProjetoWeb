@@ -1,9 +1,4 @@
-$(document).ready(function() {
-	$(".view").click(function(){
-		var aux = $(this).attr('name');
-		alert(aux);
-	});
-	
+$(document).ready(function() {	
 	$(".autenticar").click(function(e){
 		var link = $(".autenticar a").attr('href');
 		var aux = $(this).attr('name');
@@ -12,8 +7,7 @@ $(document).ready(function() {
 			type: 'GET',
 			url: link+"?id="+aux,
 			success: function(data){
-				//$(".CadastrarFornecedor").fadeOut(-100);
-				$("#CadastrarFornecedor").html(data);
+				$("#Formulario").html(data);
 			},
 			error: function(){
 				alert("erro");

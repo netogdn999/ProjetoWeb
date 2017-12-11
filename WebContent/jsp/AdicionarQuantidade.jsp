@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
-<jsp:include page="../css/PedidoEstiloForm.css"></jsp:include>
+<jsp:include page="../css/QuantidadeEstiloForm.css"></jsp:include>
 <jsp:include page="../css/Alerta.css"></jsp:include>
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 <%
-out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp/cadastrarPedido.jsp' id='cadastrar'>"+
+out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp/cadastrarQuantidade.jsp' id='cadastrar'>"+
 				"<div class='alerta' id='alerta'>"+
 					"<figure class='fechar' id='fechar'>"+
 						"<img src='imagens/fechar.png'>"+
@@ -21,9 +21,9 @@ out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp
 						"Cadastrado com sucesso!"+
 					"</p>"+
 				"</div>"+
-				"<label for='dataFim' class='labelCPedido' id='required'>Prazo final do pedido:</label>"+
+				"<label for='qtd' class='labelCQuantidade' id='required'>Quantidade:</label>"+
 				"<br/>"+
-				"<input class='inputCPedido' type='date' required='required'name='dataFim'/>"+
+				"<input class='inputCQuantidade' type='number' required='required' placeholder='Digite a quantidade' size='80' maxlength='80' name='qtd'/>"+
 			"</form>");  
 %>
 </body>

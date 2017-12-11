@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.Formulario{
+	position: relative;
+	margin: 10% 0 0 10%;
+}
+
+#Formulario{
+	display: none;
+}
+
+.inputCCategoria{
+	position: relative;
+	padding: 0.5%;
+	margin-bottom: 1%;
+}
+
+.labelCCategoria{
+	position: relative;
+	font-size: 1.2em;
+}

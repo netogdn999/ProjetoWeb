@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
 <style type="text/css">
-<jsp:include page="../css/PedidoEstiloForm.css"></jsp:include>
+<jsp:include page="../css/CategoriaEstiloForm.css"></jsp:include>
 <jsp:include page="../css/Alerta.css"></jsp:include>
 </style>
-<title>Insert title here</title>
 </head>
 <body>
 <%
-out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp/cadastrarPedido.jsp' id='cadastrar'>"+
+out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp/CCategoria.jsp' id='cadastrar'>"+
 				"<div class='alerta' id='alerta'>"+
 					"<figure class='fechar' id='fechar'>"+
 						"<img src='imagens/fechar.png'>"+
@@ -21,10 +21,11 @@ out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp
 						"Cadastrado com sucesso!"+
 					"</p>"+
 				"</div>"+
-				"<label for='dataFim' class='labelCPedido' id='required'>Prazo final do pedido:</label>"+
+				"<label for='nome' class='labelCCategoria' id='required'>Nome:</label>"+
 				"<br/>"+
-				"<input class='inputCPedido' type='date' required='required'name='dataFim'/>"+
-			"</form>");  
+				"<input class='inputCCategoria' type='text' required='required' placeholder='Nome da categoria' size='80' maxlength='80' name='nome'/>"+
+			"</form>"); 
+
 %>
 </body>
 </html>

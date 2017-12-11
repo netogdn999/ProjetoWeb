@@ -68,6 +68,29 @@ body{
 	font-size: 1.2em;
 }
 
+.inputCUsuario{
+	position: relative;
+	padding: 0.5%;
+}
+
+.labelCUsuario{
+	position: relative;
+	font-size: 1.2em;
+}
+
+.inputCSenha{
+	position: relative;
+	margin-left: 28%;
+	padding: 0.5%;
+	margin-bottom: 1%;
+}
+
+.labelCSenha{
+	position: relative;
+	margin-left: 40%;
+	font-size: 1.2em;
+}
+
 .inputCFornecedor1{
 	position: relative;
 	padding: 0.5%;
