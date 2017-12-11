@@ -73,14 +73,14 @@ public class FornecedorDAO {
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Opera√ß√£o n√£o realizada com sucesso.", e);
+            throw new DAOException("OperaÁ„o n„o realizada com sucesso.", e);
         } finally {
             try {
                 if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
-                throw new DAOException("N√£o foi poss√≠vel fechar a conex√£o.", e);
+                throw new DAOException("N„o foi posÌvel fechar a conex„o.", e);
             }
         }
     }

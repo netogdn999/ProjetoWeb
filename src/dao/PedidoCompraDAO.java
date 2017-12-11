@@ -34,6 +34,7 @@ public class PedidoCompraDAO {
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
+        	System.out.println(e.getMessage());
             throw new DAOException("Operação não realizada com sucesso.", e);
         } finally {
             try {
@@ -175,7 +176,7 @@ public class PedidoCompraDAO {
         }
         return pedido_compraes;
     }
-
+	
 	public int idUltimoCadastrado() throws DAOException{
 	       Connection con = null;
 	       int id=-1;
@@ -201,8 +202,7 @@ public class PedidoCompraDAO {
 	       }
 	       return id;
 	   }
-
-
+	
 	public ArrayList<PedidoCompraBean> mostrarPedidosCategoria(int idCategoria) throws DAOException {
         Connection con = null;
         ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();

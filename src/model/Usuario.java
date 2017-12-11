@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import model.CnpjInvalidoException;
 import dao.DAOException;
+import dao.FornecedorDAO;
 import model.EmailInvalidoException;
 import model.ParametroInvalidoException;
 import control.FornecedorBean;
@@ -94,6 +95,8 @@ public class Usuario {
 	}
 	public void deletar(UsuarioBean bean) throws DAOException, ParametroInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
+		FornecedorDAO dao2 = new FornecedorDAO();
+		dao2.delete(bean.getIdFornecedor());
 		dao.delete(bean.getLogin());
 	}
 	public UsuarioBean encontrar(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
@@ -102,13 +105,13 @@ public class Usuario {
 		return usuBean;
 	}
 	
-public UsuarioBean encontrar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	public UsuarioBean encontrar(FornecedorBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(bean.getId());
 		return usuBean;
 	}
-
-public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	
+	public void entrar(UsuarioBean bean) throws DAOException, LoginInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		UsuarioDAO dao = new UsuarioDAO();
 		UsuarioBean usuBean = dao.encontrar(bean.getLogin());
 		if(usuBean.getPrivilegio()==3) {

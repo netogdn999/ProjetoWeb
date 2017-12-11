@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import model.CnpjInvalidoException;
@@ -138,13 +139,9 @@ public class PedidoCompra {
 		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosCategoria(bean.getId());
 		return pedsBean;
 	}
-	public ArrayList<PedidoCompraBean> mostrarPedidosUsuario(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+	
+	public PedidoCompraBean ultimoPedidoCadastrado() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
 		PedidoCompraDAO dao = new PedidoCompraDAO();
-		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosUsuario(bean.getLogin());
-		return pedsBean;
-	}
-		public PedidoCompraBean ultimoPedidoCadastrado() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException{
-		PedidoCompraBean dao = new PedidoCompraBean();
 		int id = dao.idUltimoCadastrado();
 		if(id==-1) {
 			throw new ParametroInvalidoException("Nenhum pedido cadastrado");
@@ -153,5 +150,10 @@ public class PedidoCompra {
 		pedBean.setId(id);
 		return encontrar(pedBean);
 	}
-
+	
+	public ArrayList<PedidoCompraBean> mostrarPedidosUsuario(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		PedidoCompraDAO dao = new PedidoCompraDAO();
+		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosUsuario(bean.getLogin());
+		return pedsBean;
+	}
 }

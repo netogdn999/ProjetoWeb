@@ -220,9 +220,6 @@ public class Fornecedor {
 		dao.update(bean.getId(), bean.getNomeFantasia(),bean.getRazaoSocial(), bean.getCnpj(),
 				bean.getEmail(), bean.getEndereco(), bean.getCep(),
 				bean.getTelefone1(), bean.getTelefone2(), bean.isAutenticado());
-		
-		Categoria cat = new Categoria();
-		cat.inserirFornecedorCategoria(bean);
 	}
 	public void deletar(FornecedorBean bean) throws DAOException, ParametroInvalidoException {
 		FornecedorDAO dao = new FornecedorDAO();

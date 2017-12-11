@@ -138,7 +138,7 @@ public class UsuarioDAO {
         return usuario;
     }
 	
-public UsuarioBean encontrar(int idFornecedor) throws DAOException{
+	public UsuarioBean encontrar(int idFornecedor) throws DAOException{
 		Connection con=null;
         UsuarioBean usuario = null;
                 
@@ -146,7 +146,7 @@ public UsuarioBean encontrar(int idFornecedor) throws DAOException{
         	con = new ConnectionFactory().conectar("leilao");
             String sql = "select * from usuario where id_fornecedor = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, idFornecedor);
+            pst.setInt(1, idFornecedor);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
             	usuario = map(rs);
@@ -164,6 +164,7 @@ public UsuarioBean encontrar(int idFornecedor) throws DAOException{
         }
         return usuario;
     }
+	
 	public ArrayList<UsuarioBean> mostrarTodos() throws DAOException {
         Connection con = null;
         ArrayList<UsuarioBean> usuarios = new ArrayList<>();
