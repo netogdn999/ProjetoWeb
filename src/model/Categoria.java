@@ -6,6 +6,7 @@ import control.CategoriaBean;
 import dao.CategoriaDAO;
 import dao.DAOException;
 import control.FornecedorBean;
+import control.PedidoCompraBean;
 import model.ParametroInvalidoException;
 import control.ProdutoBean;
 
@@ -95,5 +96,4 @@ public class Categoria {
 
 		return cat;
 	}
-
 }

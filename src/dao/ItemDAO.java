@@ -17,7 +17,7 @@ public class ItemDAO {
         Connection con = null;
         try {
             con = new ConnectionFactory().conectar("leilao");
-            String insert_sql = "insert into item (id_pedido_compra,id_produto, qtd) values (?, ?, ?)";
+            String insert_sql = "insert into item (id_pedido_compra,id_produto, quantidade) values (?, ?, ?)";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
             //Passando os paramentros para o SQL
@@ -27,7 +27,7 @@ public class ItemDAO {
             //Executando os comandos
             pst.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Opera√ß√£o n√£o realizada com sucesso.", e);
+            throw new DAOException("OperaÁ„o n„o realizada com sucesso.", e);
         } finally {
             try {
                 if (con != null) {
@@ -43,7 +43,7 @@ public class ItemDAO {
         Connection con = null;
         try {
             con = new ConnectionFactory().conectar("leilao");
-            String insert_sql = "update item set id_pedido_compra = ?, id_produto = ?, qtd = ? where id = ?";
+            String insert_sql = "update item set id_pedido_compra = ?, id_produto = ?, quantidade = ? where id = ?";
             PreparedStatement pst;
             pst = con.prepareStatement(insert_sql);
             //Passando os paramentros para o SQL

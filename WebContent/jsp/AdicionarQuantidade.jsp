@@ -12,7 +12,7 @@
 </head>
 <body>
 <%
-out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp/cadastrarQuantidade.jsp' id='cadastrar'>"+
+out.println("<form class='Formulario' name='cadastrar' method='post' action='jsp/cadastrarQuantidade.jsp?id="+request.getParameter("id")+"' id='cadastrar'>"+
 				"<div class='alerta' id='alerta'>"+
 					"<figure class='fechar' id='fechar'>"+
 						"<img src='imagens/fechar.png'>"+
