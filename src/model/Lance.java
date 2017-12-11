@@ -230,6 +230,11 @@ public class Lance {
 		}
 		return lancesBean;
 	}
+	public float calcularTotal(float[] lances){
+		float total=0;
+		for(float lance: lances) total+=lance;
+		return total;
+	}
 	public ArrayList<LanceBean> mostrarLancesPedido(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException {
 		LanceDAO dao = new LanceDAO();
 		ArrayList<LanceBean> lancesBean = dao.mostrarTodosLances(bean.getId());
