@@ -89,4 +89,11 @@ public class Categoria {
 			dao.deleteFornecedorCategoria(i, bean.getId());
 		}
 	}
+	public CategoriaBean mostrarCategoriaPedido(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException {
+		CategoriaDAO dao = new CategoriaDAO();
+		CategoriaBean cat = dao.mostrarCategoriaPedido(bean.getId());
+
+		return cat;
+	}
+
 }

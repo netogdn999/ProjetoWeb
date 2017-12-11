@@ -237,4 +237,32 @@ public class CategoriaDAO {
         }
         return cat;
     }
+
+public CategoriaBean mostrarCategoriaPedido(int idPedido) throws DAOException{
+        Connection con = null;
+        CategoriaBean cat = null;
+                
+        try {
+            con = new ConnectionFactory().conectar("leilao");
+            String sql = "select * from categoria where id in (select id_categoria from produto where id in (select id_produto from item where id_pedido_compra = ?))";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idPedido);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                cat = map(rs);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Operação não realizada com sucesso.", e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                throw new DAOException("Não foi possível fechar a conexão.", e);
+            }
+        }
+        return cat;
+    }
+
 }
