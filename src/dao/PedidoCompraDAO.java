@@ -228,4 +228,30 @@ public class PedidoCompraDAO {
         }
         return pedido_compraes;
     }
+
+public ArrayList<PedidoCompraBean> mostrarPedidosSemItens() throws DAOException {
+        Connection con = null;
+        ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
+        try {
+            con = new ConnectionFactory().conectar("leilao");
+            String sql = "select * from pedido_compra where id not in (select id_pedido_compra from item)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                pedido_compraes.add(map(rs));
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Operação não realizada com sucesso.", e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                throw new DAOException("Não foi possível fechar a conexão.", e);
+            }
+        }
+        return pedido_compraes;
+    }
+
 }
