@@ -230,10 +230,21 @@ public class Lance {
 		}
 		return lancesBean;
 	}
+	public float calcularTotal(float[] lances){
+		float total=0;
+		for(float lance: lances) total+=lance;
+		return total;
+	}
 	public ArrayList<LanceBean> mostrarLancesPedido(PedidoCompraBean bean) throws DAOException, ParametroInvalidoException,  CnpjInvalidoException, EmailInvalidoException {
 		LanceDAO dao = new LanceDAO();
 		ArrayList<LanceBean> lancesBean = dao.mostrarTodosLances(bean.getId());
+		float total =0;
 		for(LanceBean lanB:lancesBean) {
+			total += lanB.getTotal();
+		}
+		total = total/lancesBean.size();
+		for(LanceBean lanB:lancesBean) {
+			if(lanB.getTotal()>(total(total*0.5)) || lanB.getTotal()<(total(total*0.5))) lanB.setForaDoPadrao(true);
 			lanB.setLances(encontrarValoresLances(lanB));
 		}
 		return lancesBean;
