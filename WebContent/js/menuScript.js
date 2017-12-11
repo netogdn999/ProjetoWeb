@@ -20,6 +20,21 @@ $(document).ready(function() {
 		$("#sair").fadeIn(450);
 	}
 	
+	$("#subMenu3").click(function(e) {
+		alert("aqui");
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: "jsp/ListarPedidoLance.jsp",
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
+	})
+	
 	$("#SM1botao1").click(function(e) {
 		$("#reset").click();
 		$("article").fadeOut(-100);
@@ -167,7 +182,7 @@ $(document).ready(function() {
 		});
 	});
 	
-	$("#SM4botao2").click(function() {
+	$("#SM4botao2").click(function(e) {
 		$("#reset").click();
 		$("article").fadeOut(-100);
 		$(".button").fadeOut(-100);
@@ -176,10 +191,23 @@ $(document).ready(function() {
 		$("#SM2botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
 		$("#SM4botao1 a").css({'color':'white'});
-		$("#SM4botao2").css({'color':'yellow'});
+		$("#SM4botao2 a").css({'color':'yellow'});
 		$("#SM4botao3 a").css({'color':'white'});
 		$("#SM4botao4 a").css({'color':'white'});
+		var link=$("#SM4botao2 a").attr('href');
+		e.preventDefault();
+		$.ajax({
+			type: 'GET',
+			url: link,
+			success: function(data){
+				$("#Formulario").html(data);
+				$("#Formulario").fadeIn(250);
+			},
+			error: function(){
+			}
+		});
 	});
+	
 	$("#SM4botao3").click(function(e) {
 		$("#reset").click();
 		$("article").fadeOut(-100);
@@ -189,7 +217,7 @@ $(document).ready(function() {
 		$("#SM2botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
 		$("#SM4botao1 a").css({'color':'white'});
-		$("#SM4botao2").css({'color':'white'});
+		$("#SM4botao2 a").css({'color':'white'});
 		$("#SM4botao4 a").css({'color':'white'});
 		$("#SM4botao3 a").css({'color':'yellow'});
 		var link=$("#SM4botao3 a").attr('href');
@@ -216,7 +244,7 @@ $(document).ready(function() {
 		$("#SM2botao2 a").css({'color':'white'});
 		$("#SM1botao1 a").css({'color':'white'});
 		$("#SM4botao1 a").css({'color':'white'});
-		$("#SM4botao2").css({'color':'white'});
+		$("#SM4botao2 a").css({'color':'white'});
 		$("#SM4botao3 a").css({'color':'white'});
 		$("#SM4botao4 a").css({'color':'yellow'});
 		var link=$("#SM4botao4 a").attr('href');
@@ -257,7 +285,7 @@ $(document).ready(function() {
 	});
 	
 	$("#CF2").click(function(e) {
-		e.preventDefault();
+		//e.preventDefault();
 	});
 	
 	$("#CF5").click(function(e) {
@@ -276,18 +304,16 @@ $(document).ready(function() {
 	
 	$("#CF6").click(function(e) {
 		e.preventDefault();
-		alert("aquiauqiauiq");
-		$(".Formulario").ajaxSubmit({
-			success: function(data) {
-				alert("entrou");
+		$.ajax({
+            url: $(".Formulario").attr('action'),
+            type: 'POST',
+            data: $(".Formulario").serialize(),
+            success: function(data) {
 				$("#Formulario").html(data);
 				$("#Formulario").show();
 				$(".button").fadeOut(-100);
-			},
-			error: function() {
-				alert("error");
-			}
-		});
+            }
+        });
 	});
 	
 	$("#CF4").click(function(e) {

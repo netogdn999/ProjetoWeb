@@ -237,8 +237,8 @@ public class CategoriaDAO {
         }
         return cat;
     }
-
-public CategoriaBean mostrarCategoriaPedido(int idPedido) throws DAOException{
+	
+	public CategoriaBean mostrarCategoriaPedido(int idPedido) throws DAOException{
         Connection con = null;
         CategoriaBean cat = null;
                 
@@ -264,5 +264,4 @@ public CategoriaBean mostrarCategoriaPedido(int idPedido) throws DAOException{
         }
         return cat;
     }
-
 }

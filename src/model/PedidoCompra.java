@@ -134,14 +134,6 @@ public class PedidoCompra {
 		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarTodos();
 		return pedsBean;
 	}
-public void deletarPedidosSemItens() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
-		PedidoCompraDAO dao = new PedidoCompraDAO();
-		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosSemItens();
-		for(PedidoCompraBean ped : pedsBean){
-			deletar(ped)
-}
-	}
-
 	public ArrayList<PedidoCompraBean> mostrarPedidosCategoria(CategoriaBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
 		PedidoCompraDAO dao = new PedidoCompraDAO();
 		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosCategoria(bean.getId());
@@ -157,6 +149,14 @@ public void deletarPedidosSemItens() throws DAOException, ParametroInvalidoExcep
 		PedidoCompraBean pedBean = new PedidoCompraBean();
 		pedBean.setId(id);
 		return encontrar(pedBean);
+	}
+	
+	public void deletarPedidosSemItens() throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {
+		PedidoCompraDAO dao = new PedidoCompraDAO();
+		ArrayList<PedidoCompraBean> pedsBean = dao.mostrarPedidosSemItens();
+		for(PedidoCompraBean ped : pedsBean){
+			deletar(ped);
+		}
 	}
 	
 	public ArrayList<PedidoCompraBean> mostrarPedidosUsuario(UsuarioBean bean) throws DAOException, ParametroInvalidoException, CnpjInvalidoException, EmailInvalidoException {

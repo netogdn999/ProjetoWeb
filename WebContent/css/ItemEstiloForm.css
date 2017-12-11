@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.Formulario{
+	position: relative;
+	margin: 10% 0 0 10%;
+}
+
+#Formulario{
+	display: none;
+}
+
+.inputCItem{
+	position: relative;
+	padding: 0.5%;
+	margin-bottom: 1%;
+}
+
+.labelCItem{
+	position: relative;
+	font-size: 1.2em;
+}
+.labelCItem1{
+	position: relative;
+	margin-right: 9%;
+	font-size: 1.2em;
+}
+.labelCItem2{
+	position: relative;
+	margin-left: -5%;
+	font-size: 1.2em;
+}

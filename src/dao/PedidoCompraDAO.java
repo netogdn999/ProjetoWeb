@@ -228,8 +228,8 @@ public class PedidoCompraDAO {
         }
         return pedido_compraes;
     }
-
-public ArrayList<PedidoCompraBean> mostrarPedidosSemItens() throws DAOException {
+	
+	public ArrayList<PedidoCompraBean> mostrarPedidosSemItens() throws DAOException {
         Connection con = null;
         ArrayList<PedidoCompraBean> pedido_compraes = new ArrayList<>();
         try {
